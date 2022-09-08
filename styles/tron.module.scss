@@ -1,0 +1,42 @@
+.content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-bottom: 1px solid #dfdfdf;
+  border-right: 1px solid #dfdfdf;
+  background-color: #ffffff;
+  height: 100%;
+  overflow: auto;
+}
+
+.bezel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+}
+
+.experimental {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tron {
+  font-family: "Orbitron", sans-serif;
+  font-size: 3vw;
+  text-align: center;
+  color: #d53c3d;
+}
+
+.lined {
+  font-size: 4vw;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px;
+}

@@ -1,0 +1,108 @@
+.content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-bottom: 1px solid #dfdfdf;
+  border-right: 1px solid #dfdfdf;
+  background-color: #02B6B6;
+  height: 100%;
+  overflow: auto;
+}
+
+.bezel {
+  position: relative;
+  display: flex;
+  
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  background: repeating-linear-gradient(transparent, rgba(0,0,0,0.1) 1px 1px, transparent 1px 2px, rgba(0,0,0,0.1) 1px 1px);
+}
+
+.headerImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url("/img/discs.png");
+  background-position-x: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.quad {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: [first] auto [line2] 1fr [line3] auto [end];
+  grid-template-rows: [row1-start] auto [row1-end] 1fr [third-line] auto [last-line];
+}
+
+.item {
+  padding: 2vw;
+  border: 1px solid #ccc;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin: 5px;
+  z-index: 10;
+  border-left: 1px solid #dfdfdf;
+  border-top: 1px solid #dfdfdf;
+  border-right: 1px solid #7f7f7f;
+  border-bottom: 1px solid #7f7f7f;
+  background-color: #ffffff;
+}
+
+.extraBezel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: grid;
+  grid-template-columns: [first] 12px [line2] auto [line3] 12px [end];
+  grid-template-rows: [row1-start] 12px [row1-end] auto [third-line] 12px [last-line];
+
+  padding: 4px;
+}
+
+.corner {
+  width: 12px;
+  height: 12px;
+  border: 1.25px solid #000000;
+}
+
+.lines {
+  margin: 1px 4px;
+  background: repeating-linear-gradient(
+    transparent,
+    #000 1px 1px,
+    transparent 1px 2px,
+    #000 1px 1px
+  );
+}
+
+.verticalLines {
+  margin: 4px 1px;
+  background: repeating-linear-gradient(
+    0.25turn,
+    transparent,
+    #000 1px 1px,
+    transparent 1px 2px,
+    #000 1px 1px
+  );
+
+  // grid-column-start: 1;
+  // grid-column-end: line2;
+  // grid-row-start: row1-end;
+  // grid-row-end: third-line;
+}

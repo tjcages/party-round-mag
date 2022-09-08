@@ -1,0 +1,163 @@
+.content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-bottom: 1px solid #dfdfdf;
+  border-right: 1px solid #dfdfdf;
+  background: #5F27C2;
+  // background: linear-gradient(180deg, #140d30 0%, #160c3f 100%);
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;
+}
+
+.bezel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  background: repeating-linear-gradient(
+    transparent,
+    rgba(195, 49, 213, 1) 1px 1px,
+    transparent 1px 2px,
+    rgba(195, 49, 213, 1) 1px 1px
+  );
+  box-sizing: border-box;
+
+  h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 3vw;
+    text-align: center;
+  }
+}
+
+.header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #ffffff;
+  margin-bottom: 12px;
+}
+
+.buyContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 12px;
+  border: 1px dashed #ffffff;
+  margin-top: 24px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+}
+
+.highlight {
+  font-size: 22px;
+  text-decoration: underline;
+}
+
+.sticker {
+  position: absolute;
+  top: -40px;
+  right: -36px;
+  width: 100px;
+  height: 100px;
+}
+
+.exclusive {
+  position: absolute;
+  top: 120px;
+  left: 50px;
+  width: 120px;
+  height: 30px;
+  transform: rotate(20deg);
+  opacity: 0;
+}
+
+.exclusive:before {
+  content: "";
+  position: absolute;
+  left: -100px;
+  right: -100px;
+  height: 36px;
+  top: -3px;
+  background: #FFEF61;
+  border-top: 2px solid #FF0A2E;
+  border-bottom: 2px solid #FF0A2E;
+}
+
+.graphic {
+  position: relative;
+  width: 200px;
+  min-width: 200px;
+  height: 259px;
+  min-height: 259px;
+  overflow: hidden;
+
+  display: flex;
+  flex-grow: 1;
+}
+
+.sensitive {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  filter: blur(4px);
+}
+
+// Animation settings
+$totalTime: 6s;
+$items: 4;
+$animationSpeed: 2;
+
+// Calculate animation time in seconds (how long the fade lasts)
+$animationTime: 0.1s;
+// Calculate show time in seconds (how long the element is displayed)
+$showTime: (0s + $totalTime - ($animationTime * $items)) / $items;
+
+// Set animation for each element
+@for $i from 1 through $items {
+  .sensitive > *:nth-child(#{$i}) {
+    // Delay is increased for each item
+    // Starting with an offset of -$animationTime so the first element is displayed on load
+    $delay: -$animationTime + ($animationTime + $showTime) * ($i - 1);
+    animation: fadeinout $totalTime linear $delay infinite;
+  }
+}
+
+// Calculate percentages of the display time for keyframes
+$animationPercentage: 0% + 100 * (($animationTime / $totalTime));
+$showPercentage: 0% + 100 * ($showTime / $totalTime);
+
+@keyframes fadeinout {
+  0% {
+    opacity: 0;
+  }
+  #{$animationPercentage},
+  #{$animationPercentage + $showPercentage} {
+    opacity: 1;
+  }
+  #{$showPercentage + $animationPercentage * 2},
+  100% {
+    opacity: 0;
+  }
+}
