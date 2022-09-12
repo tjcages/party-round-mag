@@ -3,45 +3,43 @@ import styles from "../../styles/terminal.module.scss";
 
 const ENTER_KEY = 13;
 const fileSystem = {
-  "README.md": `Welcome to the Party Round Magintosh 128K terminal!
+  "readme.md": `Welcome to the Party Round Magintosh 128K terminal!
 Supported commands are:
   - ls: list directory contents
   - buy: initiate a purchase
   - clear: clear the terminal screen 
 
-  Type #'buy mag'# below to purchase a Party Round Mag.
+Type #'buy mag'# below to purchase a Party Round Mag.
 `,
   "secret1.txt": `Shhhh!`,
   "secret2.txt": `Zip it!`,
-  mag: `
+  mag: `* 
 ██████╗ ██╗   ██╗██╗   ██╗    ███╗   ███╗ █████╗  ██████╗ 
 ██╔══██╗██║   ██║╚██╗ ██╔╝    ████╗ ████║██╔══██╗██╔════╝ 
 ██████╔╝██║   ██║ ╚████╔╝     ██╔████╔██║███████║██║  ███╗
 ██╔══██╗██║   ██║  ╚██╔╝      ██║╚██╔╝██║██╔══██║██║   ██║
 ██████╔╝╚██████╔╝   ██║       ██║ ╚═╝ ██║██║  ██║╚██████╔╝
-╚═════╝  ╚═════╝    ╚═╝       ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
+╚═════╝  ╚═════╝    ╚═╝       ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ *
 
-Please enter your #full name:#
 `,
 };
-const confirm = `
+const confirm = `*
 ██████╗ ██████╗ ███╗   ██╗███████╗██╗██████╗ ███╗   ███╗
 ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔══██╗████╗ ████║
 ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██████╔╝██╔████╔██║
 ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██╔══██╗██║╚██╔╝██║
 ╚██████╗╚██████╔╝██║ ╚████║██║     ██║██║  ██║██║ ╚═╝ ██║
- ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝
+ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝*
+
 `;
-const success = `
+const success = `*
 ███████╗██╗   ██╗ ██████╗ ██████╗███████╗███████╗███████╗
 ██╔════╝██║   ██║██╔════╝██╔════╝██╔════╝██╔════╝██╔════╝
 ███████╗██║   ██║██║     ██║     █████╗  ███████╗███████╗
 ╚════██║██║   ██║██║     ██║     ██╔══╝  ╚════██║╚════██║
 ███████║╚██████╔╝╚██████╗╚██████╗███████╗███████║███████║
-╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝╚══════╝╚══════╝╚══════╝
+╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝╚══════╝╚══════╝╚══════╝*
 
-#CONGRATS!#
-Your copy of Party Round Mag will be shipped shortly.
 `;
 
 export default class Terminal extends Component {
@@ -69,10 +67,25 @@ export default class Terminal extends Component {
     };
   }
 
+  // componentDidMount() {
+  //   this.init();
+  // }
+
   componentDidUpdate(props) {
     if (this.props.window.open && !this.state.inited) {
       this.setState({ inited: true });
       this.init();
+    } else if (!this.props.window.open && this.state.inited) {
+      this.setState({
+        inited: false,
+        allowEditing: true,
+        buying: false,
+        name: null,
+        shipping: null,
+        ccNumber: null,
+        expDate: null,
+        csv: null,
+      });
     }
   }
 
@@ -91,7 +104,7 @@ export default class Terminal extends Component {
       buy: this.buyFile,
     };
     this.elements.input.addEventListener("keydown", this.onKeyDown);
-    this.catFile("README.md");
+    this.catFile("readme.md");
   }
 
   clearHistory() {
@@ -108,6 +121,7 @@ export default class Terminal extends Component {
   buyFile(fileName) {
     if (fileName in fileSystem) {
       this.addHistory(fileSystem[fileName]);
+      this.addHistory(`Please enter your #full name:#`);
       this.setState({ buying: true });
     } else
       this.addHistory(`buy: ${fileName}: No such product or drop for sale`);
@@ -125,7 +139,20 @@ export default class Terminal extends Component {
       else {
         clearInterval(interval);
         that.addHistory(success);
-        that.setState({ allowEditing: true });
+        that.addHistory(`
+#CONGRATS!#
+Your copy of Party Round Mag will be shipped shortly.
+        `);
+
+        that.setState({
+          allowEditing: true,
+          buying: false,
+          name: null,
+          shipping: null,
+          ccNumber: null,
+          expDate: null,
+          csv: null,
+        });
       }
       that.scrollToBottom();
     }, 1000);
@@ -143,16 +170,38 @@ export default class Terminal extends Component {
 
     let outputSpan = document.createElement("span");
     outputSpan.classList.add(styles.outputSpan);
-    const outputArray = output.split("#");
-    outputArray.forEach((item, i) => {
+
+    if (output.includes("#")) {
+      const outputArray = output.split("#");
+      outputArray.forEach((item, i) => {
+        let outputEl = document.createElement("pre");
+        const outputText = document.createTextNode(item);
+        outputEl.classList.add(styles.output);
+        if (outputArray.length > 1) outputEl.classList.add(styles.outputInline);
+        if (i == 1) outputEl.classList.add(styles.highlight);
+        outputEl.appendChild(outputText);
+        outputSpan.appendChild(outputEl);
+      });
+    } else if (output.includes("*")) {
+      console.log("INCLUDING");
+      const outputArray = output.split("*");
+      console.log(outputArray);
+      outputArray.forEach((item, i) => {
+        let outputEl = document.createElement("pre");
+        const outputText = document.createTextNode(item);
+        outputEl.classList.add(styles.output);
+        if (outputArray.length > 1) outputEl.classList.add(styles.outputInline);
+        if (i == 1) outputEl.classList.add(styles.shrink);
+        outputEl.appendChild(outputText);
+        outputSpan.appendChild(outputEl);
+      });
+    } else {
       let outputEl = document.createElement("pre");
-      const outputText = document.createTextNode(item);
+      const outputText = document.createTextNode(output);
       outputEl.classList.add(styles.output);
-      if (outputArray.length > 1) outputEl.classList.add(styles.outputInline);
-      if (i == 1) outputEl.classList.add(styles.highlight);
       outputEl.appendChild(outputText);
       outputSpan.appendChild(outputEl);
-    });
+    }
 
     this.elements.outputContainer.appendChild(outputSpan);
   }
@@ -216,7 +265,6 @@ export default class Terminal extends Component {
       } else if (inputText == "enter") {
         this.addHistory(`Buying...`);
         this.purchaseRequest();
-        this.setState({ buying: false });
       } else this.addHistory(`sh: command not found: ${inputCommand}`);
       return;
     }
@@ -230,11 +278,11 @@ export default class Terminal extends Component {
   render() {
     return this.props.window.open ? (
       <div id="content" className={styles.content}>
-        <div className={styles.bezel} onClick={() => this.elements.input.focus()}>
-          <div
-            id="terminal"
-            className={styles.terminal}
-          >
+        <div
+          className={styles.bezel}
+          onClick={() => this.elements.input.focus()}
+        >
+          <div id="terminal" className={styles.terminal}>
             <div id="outputContainer" className={styles.outputContainer}></div>
             <div className={styles.currentLine}>
               <span className={styles.prompt}>$</span>

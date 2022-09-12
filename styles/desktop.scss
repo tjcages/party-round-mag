@@ -179,8 +179,12 @@ svg {
 
   .grab {
     position: absolute;
-    margin: -2em;
-    padding: 2em;
+    @media only screen and (max-width: 600px) {
+      & {
+        margin: -2em;
+        padding: 2em;
+      }
+    }
   }
 
   .n-grab {
@@ -197,6 +201,7 @@ svg {
     width: 4px;
     height: 4px;
     cursor: nesw-resize;
+    z-index: 1;
   }
 
   .e-grab {
@@ -213,6 +218,7 @@ svg {
     width: 4px;
     height: 4px;
     cursor: nwse-resize;
+    z-index: 1;
   }
 
   .s-grab {
@@ -229,6 +235,7 @@ svg {
     width: 4px;
     height: 4px;
     cursor: nesw-resize;
+    z-index: 1;
   }
 
   .w-grab {
@@ -245,6 +252,7 @@ svg {
     width: 4px;
     height: 4px;
     cursor: nwse-resize;
+    z-index: 1;
   }
 }
 

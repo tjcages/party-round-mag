@@ -24,6 +24,7 @@ const Buy = (props) => {
                 src={"/img/pages/money.jpg"}
                 alt="default icon"
                 layout="fill"
+                priority={true}
               />
               <Image
                 id="f2"
