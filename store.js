@@ -60,9 +60,9 @@ const store = (set, get) => ({
       top: "330px",
       width: "400px",
       height: "400px",
-      mobileLeft: "26vw",
-      mobileTop: "10px",
-      mobileWidth: "74vw",
+      mobileLeft: "14vw",
+      mobileTop: "20vh",
+      mobileWidth: "84vw",
       mobileHeight: "50vh",
     },
     {
