@@ -40,10 +40,10 @@ const store = (set, get) => ({
       top: "150px",
       width: "500px",
       height: "490px",
-      mobileLeft: "26vw",
-      mobileTop: "10px",
-      mobileWidth: "74vw",
-      mobileHeight: "50vh",
+      mobileLeft: "2vw",
+      mobileTop: "7vh",
+      mobileWidth: "96vw",
+      mobileHeight: "70vh",
     },
     {
       id: 2,
@@ -117,6 +117,10 @@ const store = (set, get) => ({
       width: "520px",
       height: "300px",
       shortcut: false,
+      mobileLeft: "0",
+      mobileTop: "0",
+      mobileWidth: "100vw",
+      mobileHeight: "50vh",
     },
     {
       id: 6,
@@ -517,6 +521,7 @@ const store = (set, get) => ({
     if (!newWindows[id].open) {
       newWindows[id].open = true;
     }
+    newWindows[id].minimized = false;
 
     set((state) => ({ windows: newWindows }));
     get().unselectAll(id);

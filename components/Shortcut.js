@@ -15,7 +15,13 @@ const Shortcut = (props) => {
     event.stopPropagation();
     switch (event.detail) {
       case 1:
-        toggleSelectedShortcut(props.window.id);
+        if (isSelected) {
+          if (props.window.href) {
+            window.open(props.window.href, "_blank");
+          } else {
+            props.openWindow(props.window.id);
+          }
+        } else toggleSelectedShortcut(props.window.id);
         break;
       case 2: {
         if (props.window.href) {

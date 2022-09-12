@@ -7,9 +7,7 @@
   border-bottom: 1px solid #dfdfdf;
   border-right: 1px solid #dfdfdf;
   background: #5F27C2;
-  // background: linear-gradient(180deg, #140d30 0%, #160c3f 100%);
   height: 100%;
-  overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,6 +28,7 @@
     rgba(195, 49, 213, 1) 1px 1px
   );
   box-sizing: border-box;
+  overflow: auto;
 
   h1 {
     font-size: 24px;
@@ -61,13 +60,21 @@
   padding: 12px;
   border: 1px dashed #ffffff;
   margin-top: 24px;
+
+  @media only screen and (max-width: 600px) {
+    & {
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+    }
+  }
 }
 
 .info {
   display: flex;
   flex-direction: column;
   text-align: center;
-
+  width: 100%;
 }
 
 .highlight {
@@ -81,6 +88,12 @@
   right: -36px;
   width: 100px;
   height: 100px;
+
+  @media only screen and (max-width: 600px) {
+    & {
+      top: -310px;
+    }
+  }
 }
 
 .exclusive {
