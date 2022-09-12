@@ -175,7 +175,7 @@ export default class Terminal extends Component {
     if (e.keyCode !== ENTER_KEY) return;
     if (!this.state.allowEditing) return;
 
-    const inputText = this.elements.input.value;
+    const inputText = this.elements.input.value.toLowerCase();
     const inputArray = inputText.split(" ");
     const inputCommand = inputArray[0];
     const arg = inputArray[1];

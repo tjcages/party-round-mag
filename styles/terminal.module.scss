@@ -10,6 +10,7 @@
   color: #ffffff;
   height: 100%;
   overflow: auto;
+  font-size: 16px;
 }
 
 .bezel {
@@ -64,7 +65,7 @@
   color: #ffffff;
   font-family: monospace;
   line-height: 1.2;
-  word-break: break-all;
+  word-break: break-word;
   white-space: pre-wrap;
 }
 
