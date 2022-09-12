@@ -199,7 +199,7 @@ const store = (set, get) => ({
     {
       id: 9,
       title: "Party Pong",
-      icon: { src: "/img/joystick.png" },
+      icon: { src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png" },
       color: "#000000",
       page: "pong",
       selected: false,
@@ -436,7 +436,7 @@ const store = (set, get) => ({
     {
       id: 19,
       title: "Go Tron",
-      icon: { src: "/img/joystick.png" },
+      icon: { src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png" },
       color: "#d53c3d",
       page: "tron",
       selected: false,
@@ -545,7 +545,7 @@ const store = (set, get) => ({
     {
       id: 23,
       title: "Cap Table Pokémon",
-      icon: { src: "/img/joystick.png" },
+      icon: { src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png" },
       color: "#000000",
       page: "image",
       selected: false,
