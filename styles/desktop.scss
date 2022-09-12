@@ -179,6 +179,8 @@ svg {
 
   .grab {
     position: absolute;
+    margin: -2em;
+    padding: 2em;
   }
 
   .n-grab {
@@ -261,6 +263,7 @@ svg {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2px;
+  z-index: 10;
 
   .title {
     color: #bfbfbf;
