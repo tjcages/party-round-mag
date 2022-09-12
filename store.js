@@ -49,7 +49,7 @@ const store = (set, get) => ({
       id: 2,
       title: "VOL.001",
       icon: { src: "https://win98icons.alexmeub.com/icons/png/msagent-3.png" },
-      color: "#017F7E",
+      color: "#222222",
       page: "vol",
       selected: false,
       active: false,

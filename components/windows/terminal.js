@@ -53,6 +53,7 @@ export default class Terminal extends Component {
     this.listFiles = this.listFiles.bind(this);
     this.catFile = this.catFile.bind(this);
     this.buyFile = this.buyFile.bind(this);
+    this.resetInput = this.resetInput.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
 
     this.state = {
@@ -60,6 +61,7 @@ export default class Terminal extends Component {
       allowEditing: true,
       buying: false,
       name: null,
+      email: null,
       shipping: null,
       ccNumber: null,
       expDate: null,
@@ -143,19 +145,22 @@ export default class Terminal extends Component {
 #CONGRATS!#
 Your copy of Party Round Mag will be shipped shortly.
         `);
-
-        that.setState({
-          allowEditing: true,
-          buying: false,
-          name: null,
-          shipping: null,
-          ccNumber: null,
-          expDate: null,
-          csv: null,
-        });
       }
       that.scrollToBottom();
     }, 1000);
+  }
+
+  resetInput() {
+    this.setState({
+      allowEditing: true,
+      buying: false,
+      name: null,
+      email: null,
+      shipping: null,
+      ccNumber: null,
+      expDate: null,
+      csv: null,
+    });
   }
 
   scrollToBottom() {
@@ -183,9 +188,7 @@ Your copy of Party Round Mag will be shipped shortly.
         outputSpan.appendChild(outputEl);
       });
     } else if (output.includes("*")) {
-      console.log("INCLUDING");
       const outputArray = output.split("*");
-      console.log(outputArray);
       outputArray.forEach((item, i) => {
         let outputEl = document.createElement("pre");
         const outputText = document.createTextNode(item);
@@ -243,6 +246,9 @@ Your copy of Party Round Mag will be shipped shortly.
       // determine which field is next
       if (this.state.name == null) {
         this.setState({ name: inputText });
+        this.addHistory(`Please enter your #email:#`);
+      } else if (this.state.email == null) {
+        this.setState({ email: inputText });
         this.addHistory(`Please enter your full #shipping address:#`);
       } else if (this.state.address == null) {
         this.setState({ address: inputText });
@@ -265,6 +271,8 @@ Your copy of Party Round Mag will be shipped shortly.
       } else if (inputText == "enter") {
         this.addHistory(`Buying...`);
         this.purchaseRequest();
+        this.resetInput();
+        
       } else this.addHistory(`sh: command not found: ${inputCommand}`);
       return;
     }
