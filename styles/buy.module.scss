@@ -6,7 +6,7 @@
   border-left: 1px solid #000000;
   border-bottom: 1px solid #dfdfdf;
   border-right: 1px solid #dfdfdf;
-  background: #5F27C2;
+  background: #5f27c2;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -28,16 +28,32 @@
     rgba(195, 49, 213, 1) 1px 1px
   );
   box-sizing: border-box;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   h1 {
     font-size: 24px;
     text-align: center;
   }
 
+  @media only screen and (max-width: 600px) {
+    & {
+      padding: 12px;
+    }
+    h1 {
+      font-size: 20px;
+    }
+  }
+
   h2 {
     font-size: 40px;
     text-align: center;
+  }
+
+  @media only screen and (max-width: 600px) {
+    h2 {
+      font-size: 30px;
+    }
   }
 }
 
@@ -54,18 +70,36 @@
 .buyContainer {
   position: relative;
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: [first] auto [center] 1fr [end];
+  grid-template-rows: [first] 1fr [center] auto [end];
   justify-content: center;
-  gap: 24px;
+  column-gap: 24px;
+  row-gap: 12px;
   padding: 12px;
   border: 1px dashed #ffffff;
   margin-top: 24px;
 
+  .graphic {
+    grid-column-start: first;
+    grid-column-end: first;
+    grid-row-start: first;
+    grid-row-end: end;
+  }
+
+  button {
+    width: 100%;
+    flex-grow: 1;
+  }
+
   @media only screen and (max-width: 600px) {
-    & {
-      flex-direction: column;
-      align-items: center;
-      padding: 24px;
+    button {
+      grid-column-start: first;
+      grid-column-end: end;
+      grid-row-start: 2;
+      grid-row-end: 2;
+      font-size: 16px;
+      margin: 0;
     }
   }
 }
@@ -73,12 +107,12 @@
 .info {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   text-align: center;
   width: 100%;
 }
 
 .highlight {
-  font-size: 22px;
   text-decoration: underline;
 }
 
@@ -91,7 +125,7 @@
 
   @media only screen and (max-width: 600px) {
     & {
-      top: -310px;
+      top: -56px;
     }
   }
 }
@@ -113,9 +147,9 @@
   right: -100px;
   height: 36px;
   top: -3px;
-  background: #FFEF61;
-  border-top: 2px solid #FF0A2E;
-  border-bottom: 2px solid #FF0A2E;
+  background: #ffef61;
+  border-top: 2px solid #ff0a2e;
+  border-bottom: 2px solid #ff0a2e;
 }
 
 .graphic {
@@ -129,6 +163,16 @@
 
   display: flex;
   flex-grow: 1;
+
+  @media only screen and (max-width: 600px) {
+    & {
+      width: 140px;
+      min-width: 140px;
+      max-width: 140px;
+      height: 181px;
+      min-height: 181px;
+    }
+  }
 }
 
 .sensitive {

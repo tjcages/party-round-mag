@@ -9,13 +9,16 @@ const Buy = (props) => {
 
   function handleBuyClicked(e) {
     e.stopPropagation();
-    openWindow(5) // Terminal
+    openWindow(5); // Terminal
   }
 
   return (
     <div className={styles.content}>
       <div className={styles.bezel}>
-        <h1><span className={styles.highlight}>Limited Edition Magazine</span> filled with alpha, editorial, and exclusive mini-drops</h1>
+        <h1>
+          <span className={styles.highlight}>Limited Edition Magazine</span>{" "}
+          filled with alpha, editorial, and exclusive mini-drops
+        </h1>
         <div className={styles.buyContainer}>
           <div className={styles.graphic}>
             <div className={styles.sensitive}>
@@ -73,8 +76,8 @@ const Buy = (props) => {
             <h3>JUST PAY SHIPPING</h3>
             <h2>$0.99</h2>
             <br />
-            <Button text="BUY NOW" large onClick={(e) => handleBuyClicked(e)} />
           </div>
+          <Button text="BUY NOW" large onClick={(e) => handleBuyClicked(e)} />
         </div>
       </div>
     </div>
