@@ -78,7 +78,7 @@ const TaskBar = (props) => {
           <div className="menu">
             <ul>
               <li onMouseEnter={() => setProgramMenuOpen(2)}>
-                <DefaultIcon icon={{ src: "/img/drops-icon.png" }} mid />
+                <DefaultIcon icon={{ src: "https://win98icons.alexmeub.com/icons/png/help_book_cool-4.png" }} mid />
                 <div className="text">
                   <span className="underline">D</span>rops
                 </div>
@@ -87,7 +87,7 @@ const TaskBar = (props) => {
                 </svg>
               </li>
               <li onMouseEnter={() => setProgramMenuOpen(1)}>
-                <DefaultIcon icon={{ src: "/img/joystick.png" }} mid />
+                <DefaultIcon icon={{ src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png" }} mid />
                 <div className="text">
                   <span className="underline">E</span>xperiments
                 </div>

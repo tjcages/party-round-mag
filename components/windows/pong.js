@@ -16,7 +16,7 @@ const Page = (props) => {
       RIGHT: 4,
     };
 
-    var rounds = [5, 5, 5];
+    var rounds = [5, 5, 5, 5, 5];
 
     // The ball object (The cube that bounces back and forth)
     var Ball = {

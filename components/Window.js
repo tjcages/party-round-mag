@@ -12,6 +12,8 @@ import Logo from "./windows/logo";
 import Tron from "./windows/tron";
 import Pong from "./windows/pong";
 import Frame from "./windows/iframe";
+import Recycle from "./windows/recycle";
+import ImagePage from "./windows/image";
 import Page from "./windows/_default";
 
 const Window = (props) => {
@@ -85,15 +87,19 @@ const Window = (props) => {
       case "buy":
         return <Buy />;
       case "terminal":
-        return <Terminal />;
+        return <Terminal window={props.window} />;
       case "logo":
         return <Logo />;
       case "tron":
-        return <Tron />;
+        return <Tron window={props.window} />;
       case "pong":
         return <Pong />;
       case "iframe":
-        return <Frame src={props.window.src} />;
+        return <Frame src={props.window.src} window={props.window} />;
+      case "recycle":
+        return <Recycle />;
+      case "image":
+        return <ImagePage window={props.window} />;
       case "default":
         return <Page />;
     }

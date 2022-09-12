@@ -13,6 +13,8 @@ import {
 import { MeshStandardMaterial } from "three";
 import CustomShaderMaterial from "three-custom-shader-material";
 
+import useStore from "../../store";
+
 const fragmentShader = `
 float aastep(in float threshold, in float value) {
   float afwidth = length(vec2(dFdx(value), dFdy(value))) * 0.70710678118654757;
@@ -242,8 +244,9 @@ const Scene = () => {
   );
 };
 
-const Tron = () => {
-  return (
+const Tron = (props) => {
+  const windows = useStore((state) => state.windows);
+  return windows[props.window.id].open ? (
     <div className={styles.content}>
       <div className={styles.bezel}>
         <Scene />
@@ -254,7 +257,7 @@ const Tron = () => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default Tron;

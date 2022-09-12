@@ -18,8 +18,8 @@ const Mag = (props) => {
           {showFrame && (
             <iframe
               src="https://my.spline.design/partyroundmag-f24c1e039695f32f69b45ddd1315f990/"
-              width="110%"
-              height="110%"
+              width="100%"
+              height="100%"
               style={{ pointerEvents: "none" }}
             ></iframe>
           )}
