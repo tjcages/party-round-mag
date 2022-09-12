@@ -1,0 +1,314 @@
+.taskBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #c0c7c8;
+  height: 36px;
+  border-top: 1px solid #c0c7c8;
+  z-index: 1000;
+
+  > .bevel {
+    border-top: 1px solid #ffffff;
+    padding: 2px;
+    display: flex;
+
+    @media only screen and (max-width: 600px) {
+      & {
+        overflow: auto;
+      }
+  
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .startMenu {
+    position: absolute;
+    bottom: 34px;
+    left: 2px;
+    background-color: #c0c7c8;
+    display: flex;
+    padding: 2px;
+    border-top: 1px solid #c0c7c8;
+    border-left: 1px solid #c0c7c8;
+    border-bottom: 1px solid #000000;
+    border-right: 1px solid #000000;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      pointer-events: none;
+      border-top: 1px solid #ffffff;
+      border-left: 1px solid #ffffff;
+      border-bottom: 1px solid #87888f;
+      border-right: 1px solid #87888f;
+    }
+
+    &.hidden {
+      display: none;
+    }
+
+    .sideLogo {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      background-color: #87888f;
+      width: 21px;
+      min-height: 150px;
+
+      .text {
+        font-size: 20px;
+        transform: rotate(-90deg) translate3d(-115px, -1px, 0);
+      }
+
+      .windows {
+        color: #c0c7c8;
+        font-weight: 900;
+      }
+
+      .version {
+        color: #ffffff;
+        margin-left: 8px;
+      }
+    }
+
+    .menu {
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 9px 6px;
+
+          .text {
+            flex-grow: 1;
+            min-width: 100px;
+            margin-left: 8px;
+          }
+
+          .icon {
+            margin-right: 6px;
+          }
+
+          &:hover {
+            background-color: #0000a8;
+            color: #ffffff;
+          }
+        }
+      }
+
+      .underline {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .programMenu {
+    position: absolute;
+    bottom: 94px;
+    left: 180px;
+    background-color: #c0c7c8;
+    display: flex;
+    padding: 2px;
+    border-top: 1px solid #c0c7c8;
+    border-left: 1px solid #c0c7c8;
+    border-bottom: 1px solid #000000;
+    border-right: 1px solid #000000;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      pointer-events: none;
+      border-top: 1px solid #ffffff;
+      border-left: 1px solid #ffffff;
+      border-bottom: 1px solid #87888f;
+      border-right: 1px solid #87888f;
+    }
+
+    &.hidden {
+      display: none;
+    }
+
+    .menu {
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 9px 6px;
+
+          .text {
+            flex-grow: 1;
+            min-width: 140px;
+            margin-left: 8px;
+          }
+
+          &:hover {
+            background-color: #0000a8;
+            color: #ffffff;
+          }
+        }
+      }
+
+      .underline {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .taskBarItems {
+    margin-left: 1px;
+    display: flex;
+    justify-content: flex-start;
+    flex-grow: 1;
+  }
+
+  .taskBarItem {
+    position: relative;
+    width: 157px;
+    height: 30px;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-bottom: 1px solid #000000;
+    border-right: 1px solid #000000;
+    margin-left: 3px;
+    opacity: 0;
+    display: none;
+
+    &.open {
+      opacity: 1;
+      display: block;
+    }
+
+    .bevel {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-bottom: 1px solid #87888f;
+      border-right: 1px solid #87888f;
+      background-color: #c0c7c8;
+      padding-left: 3px;
+      overflow: hidden;
+      flex-wrap: break-word;
+
+      .title {
+        white-space: nowrap;
+      }
+    }
+
+    .icon {
+      margin-right: 4px;
+    }
+
+    &.active {
+      border-top: 1px solid #000000;
+      border-left: 1px solid #000000;
+      border-bottom: 1px solid #ffffff;
+      border-right: 1px solid #ffffff;
+
+      .bevel {
+        position: relative;
+        border-top: 1px solid #87888f;
+        border-left: 1px solid #87888f;
+        border-bottom: 1px solid #c0c7c8;
+        border-right: 1px solid #c0c7c8;
+        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2' height='2' fill='none'><path fill='%23fff' d='M0 0h2v2H0z'/><path fill='%23C0C7C8' d='M0 0h1v1H0zM1 1h1v1H1z'/></svg>");
+        background-repeat: repeat;
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          width: 100%;
+          background-color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .notificationArea {
+    border-top: 1px solid #87888f;
+    border-left: 1px solid #87888f;
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    padding: 5px;
+
+    .clock {
+      min-width: 60px;
+      text-align: right;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .clock {
+        width: 60px;
+      }
+    }
+  }
+}
+
+.startButton {
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #000000;
+  border-right: 1px solid #000000;
+  background-color: #c0c7c8;
+  display: flex;
+  padding: 0;
+  font-size: 11px;
+
+  .bevel {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #87888f;
+    border-right: 1px solid #87888f;
+    background-color: #c0c7c8;
+    padding: 2px 3px 3px 3px;
+  }
+
+  .icon {
+    margin-right: 3px;
+  }
+
+  &.active {
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+
+    .bevel {
+      border-top: 1px solid #87888f;
+      border-left: 1px solid #87888f;
+      padding: 2px 2px 2px 3px;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    & {
+      color: #000000;
+    }
+  }
+}

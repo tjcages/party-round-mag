@@ -1,5 +1,7 @@
-import React, { useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import useStore from "../store";
+
+import { isTablet } from "../utils/agents";
 
 import DefaultIcon from "./DefaultIcon";
 
@@ -31,15 +33,42 @@ const Window = (props) => {
 
   const windowRef = useRef();
 
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    const isMobile = isTablet();
+    setMobile(isMobile);
+  }, [])
+
   function dragMove(event, xMove, yMove, xSize, ySize) {
     let mouseX, mouseY;
 
     if (window.maximized) return;
-    mouseX = event.screenX;
-    mouseY = event.screenY;
+
+    if (event.type == "touchstart") {
+      mouseX = event.touches[0].pageX;
+      mouseY = event.touches[0].pageY;
+    } else {
+      mouseX = event.screenX;
+      mouseY = event.screenY;
+    }
+
     const onMove = (e) => {
-      let x = e.screenX;
-      let y = e.screenY;
+      let x, y;
+
+      if (event.type == "touchstart") {
+        if (e.touches && e.touches.length > 0) {
+          x = e.touches[0].pageX;
+          y = e.touches[0].pageY;
+        } else {
+          x = 0;
+          y = 0;
+        }
+      } else {
+        x = e.screenX;
+        y = e.screenY;
+      }
+
       let dx = x - mouseX;
       let dy = y - mouseY;
 
@@ -66,14 +95,19 @@ const Window = (props) => {
     };
     const onUp = () => {
       setWindowDimensions(props.window.id, windowRef.current.style);
-      console.log("Remove events");
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseup", onUp);
+      window.removeEventListener("touchmove", onMove);
+      window.removeEventListener("touchend", onUp);
     };
     window.addEventListener("mousemove", onMove, {
       passive: false,
     });
+    window.addEventListener("touchmove", onMove, {
+      passive: false,
+    });
     window.addEventListener("mouseup", onUp, { passive: true });
+    window.addEventListener("touchend", onUp, { passive: true });
   }
 
   const renderPage = () => {
@@ -113,10 +147,10 @@ const Window = (props) => {
       id={`window-${props.window.id}`}
       ref={windowRef}
       style={{
-        left: props.window.left,
-        top: props.window.top,
-        width: props.window.width,
-        height: props.window.height,
+        left: mobile ? props.window.mobileLeft : props.window.left,
+        top: mobile ? props.window.mobileTop : props.window.top,
+        width: mobile ? props.window.mobileWidth : props.window.width,
+        height: mobile ? props.window.mobileHeight : props.window.height,
       }}
       onClick={() => toggleActiveWindow(props.window.id)}
     >
@@ -126,6 +160,7 @@ const Window = (props) => {
           style={{ backgroundColor: props.window.color }}
           id={`title-bar-${props.window.id}`}
           onMouseDown={(e) => dragMove(e, 1, 1, 0, 0)}
+          onTouchStart={(e) => dragMove(e, 1, 1, 0, 0)}
         >
           <DefaultIcon icon={props.window.icon} small />
           <div className="title">{`${props.window.title}`}</div>
@@ -176,34 +211,42 @@ const Window = (props) => {
       <div
         className="grab n-grab"
         onMouseDown={(e) => dragMove(e, 0, 1, 0, -1)}
+        onTouchStart={(e) => dragMove(e, 0, 1, 0, -1)}
       ></div>
       <div
         className="grab ne-grab"
         onMouseDown={(e) => dragMove(e, 0, 1, 1, -1)}
+        onTouchStart={(e) => dragMove(e, 0, 1, 1, -1)}
       ></div>
       <div
         className="grab e-grab"
         onMouseDown={(e) => dragMove(e, 0, 0, 1, 0)}
+        onTouchStart={(e) => dragMove(e, 0, 0, 1, 0)}
       ></div>
       <div
         className="grab se-grab"
         onMouseDown={(e) => dragMove(e, 0, 0, 1, 1)}
+        onTouchStart={(e) => dragMove(e, 0, 0, 1, 1)}
       ></div>
       <div
         className="grab s-grab"
         onMouseDown={(e) => dragMove(e, 0, 0, 0, 1)}
+        onTouchStart={(e) => dragMove(e, 0, 0, 0, 1)}
       ></div>
       <div
         className="grab sw-grab"
         onMouseDown={(e) => dragMove(e, 0, 1, -1, 1)}
+        onTouchStart={(e) => dragMove(e, 0, 1, -1, 1)}
       ></div>
       <div
         className="grab w-grab"
         onMouseDown={(e) => dragMove(e, 1, 0, -1, 0)}
+        onTouchStart={(e) => dragMove(e, 1, 0, -1, 0)}
       ></div>
       <div
         className="grab nw-grab"
         onMouseDown={(e) => dragMove(e, 1, 1, -1, -1)}
+        onTouchStart={(e) => dragMove(e, 1, 1, -1, -1)}
       ></div>
     </div>
   );

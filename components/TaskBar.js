@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useStore from "../store";
+import styles from "../styles/taskbar.module.scss";
 
 import TaskBarItem from "./TaskBarItem";
 import DefaultIcon from "./DefaultIcon";
@@ -31,8 +32,8 @@ const TaskBar = (props) => {
     setStartMenuOpen(true);
 
     const onClickOutside = (event) => {
-      const startMenu = document.querySelector(".start-menu");
-      const programMenu = document.querySelector(".program-menu");
+      const startMenu = document.querySelector("#start-menu");
+      const programMenu = document.querySelector("#program-menu");
       if (
         !startMenu.contains(event.target) &&
         !programMenu.contains(event.target)
@@ -66,44 +67,74 @@ const TaskBar = (props) => {
   }
 
   return (
-    <div className="task-bar">
-      <div className="bevel">
-        <div className={`start-menu ${!startMenuOpen && "hidden"}`}>
-          <div className="side-logo">
-            <div className="text">
-              <span className="windows">Party</span>
-              <span className="version">Round</span>
+    <div className={styles.taskBar}>
+      <div className={styles.bevel}>
+        <div
+          className={`${styles.startMenu} ${!startMenuOpen && styles.hidden}`}
+          id="start-menu"
+        >
+          <div className={styles.sideLogo}>
+            <div className={styles.text}>
+              <span className={styles.windows}>Party</span>
+              <span className={styles.version}>Round</span>
             </div>
           </div>
-          <div className="menu">
+          <div className={styles.menu}>
             <ul>
               <li onMouseEnter={() => setProgramMenuOpen(2)}>
-                <DefaultIcon icon={{ src: "https://win98icons.alexmeub.com/icons/png/help_book_cool-4.png" }} mid />
-                <div className="text">
-                  <span className="underline">D</span>rops
+                <DefaultIcon
+                  icon={{
+                    src: "https://win98icons.alexmeub.com/icons/png/help_book_cool-4.png",
+                  }}
+                  mid
+                />
+                <div className={styles.text}>
+                  <span className={styles.underline}>D</span>rops
                 </div>
-                <svg className="arrow" width="4" height="6" version="2.0">
+                <svg
+                  className={styles.arrow}
+                  width="4"
+                  height="6"
+                  version="2.0"
+                >
                   <use href="#arrow-right" />
                 </svg>
               </li>
               <li onMouseEnter={() => setProgramMenuOpen(1)}>
-                <DefaultIcon icon={{ src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png" }} mid />
-                <div className="text">
-                  <span className="underline">E</span>xperiments
+                <DefaultIcon
+                  icon={{
+                    src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png",
+                  }}
+                  mid
+                />
+                <div className={styles.text}>
+                  <span className={styles.underline}>E</span>xperiments
                 </div>
-                <svg className="arrow" width="4" height="6" version="2.0">
+                <svg
+                  className={styles.arrow}
+                  width="4"
+                  height="6"
+                  version="2.0"
+                >
                   <use href="#arrow-right" />
                 </svg>
               </li>
               <li
                 onMouseEnter={() => setProgramMenuOpen(0)}
-                onClick={() => window.open("https://twitter.com/PartyRound", "_blank")}
+                onClick={() =>
+                  window.open("https://twitter.com/PartyRound", "_blank")
+                }
               >
                 <DefaultIcon icon={{ src: "/img/bird.png" }} mid />
-                <div className="text">
-                  <span className="underline">T</span>witter
+                <div className={styles.text}>
+                  <span className={styles.underline}>T</span>witter
                 </div>
-                <svg className="arrow" width="4" height="6" version="2.0">
+                <svg
+                  className={styles.arrow}
+                  width="4"
+                  height="6"
+                  version="2.0"
+                >
                   <use href="#arrow-right" />
                 </svg>
               </li>
@@ -111,8 +142,13 @@ const TaskBar = (props) => {
           </div>
         </div>
 
-        <div className={`program-menu ${!programMenuOpen && "hidden"}`}>
-          <div className="menu">
+        <div
+          className={`${styles.programMenu} ${
+            !programMenuOpen && styles.hidden
+          }`}
+          id="program-menu"
+        >
+          <div className={styles.menu}>
             <ul>
               {programMenuOpen === 1
                 ? windows
@@ -122,14 +158,14 @@ const TaskBar = (props) => {
                         key={window.id}
                         onClick={() => handleOpenProgram(window)}
                       >
-                        <div className="text">
-                          <span className="underline">
+                        <div className={styles.text}>
+                          <span className={styles.underline}>
                             {window.title.charAt(0)}
                           </span>
                           {window.title.substring(1)}
                         </div>
                         <svg
-                          className="arrow"
+                          className={styles.arrow}
                           width="4"
                           height="6"
                           version="2.0"
@@ -145,14 +181,14 @@ const TaskBar = (props) => {
                         key={window.id}
                         onClick={() => handleOpenProgram(window)}
                       >
-                        <div className="text">
-                          <span className="underline">
+                        <div className={styles.text}>
+                          <span className={styles.underline}>
                             {window.title.charAt(0)}
                           </span>
                           {window.title.substring(1)}
                         </div>
                         <svg
-                          className="arrow"
+                          className={styles.arrow}
                           width="4"
                           height="6"
                           version="2.0"
@@ -166,24 +202,24 @@ const TaskBar = (props) => {
         </div>
 
         <button
-          className={`start-button ${startMenuOpen && "active"}`}
+          className={`${styles.startButton} ${startMenuOpen && styles.active}`}
           onClick={() => openStartMenu()}
         >
-          <div className="bevel">
-            <svg className="icon" width="16" height="14">
+          <div className={styles.bevel}>
+            <svg className={styles.icon} width="16" height="14">
               <use href="#windows-icon-16" />
             </svg>
             Start
           </div>
         </button>
-        <div className="task-bar-items">
+        <div className={styles.taskBarItems}>
           {windows.map((window) => {
             if (window.taskbar !== false)
               return <TaskBarItem {...props} key={window.id} window={window} />;
           })}
         </div>
-        <div className="notification-area">
-          <div className="clock">{time}</div>
+        <div className={styles.notificationArea}>
+          <div className={styles.clock}>{time}</div>
         </div>
       </div>
     </div>

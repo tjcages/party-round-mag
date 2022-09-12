@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import useStore from "../store";
+import { isTablet } from "../utils/agents";
 
 import Icons from "../components/Icons";
 import Window from "../components/Window";
@@ -14,9 +15,14 @@ const Desktop = (props) => {
   const unmaximizeWindow = useStore((state) => state.unmaximizeWindow);
   const toggleActiveWindow = useStore((state) => state.toggleActiveWindow);
 
+  const [mobile, setMobile] = useState(false);
+
   useEffect(() => {
     startup();
-  });
+
+    const isMobile = isTablet();
+    setMobile(isMobile);
+  }, []);
 
   function startup() {
     windows.forEach((window, i) => {
@@ -29,9 +35,9 @@ const Desktop = (props) => {
   }
 
   function beforeMinimize(window, animatedTitleBar) {
-    animatedTitleBar.style.top = window.top;
-    animatedTitleBar.style.left = window.left;
-    animatedTitleBar.style.width = window.width;
+    animatedTitleBar.style.top = mobile ? window.mobileTop : window.top;
+    animatedTitleBar.style.left = mobile ? window.mobileLeft : window.left;
+    animatedTitleBar.style.width = mobile ? window.mobileWidth : window.width;
   }
 
   function afterMinimize(taskBarItem, animatedTitleBar) {

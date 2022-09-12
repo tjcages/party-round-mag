@@ -21,6 +21,7 @@ const Mag = (props) => {
               width="100%"
               height="100%"
               style={{ pointerEvents: "none" }}
+              className={styles.mag}
             ></iframe>
           )}
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import useStore from "../store";
+import styles from "../styles/taskbar.module.scss";
 
 import DefaultIcon from "./DefaultIcon";
 
@@ -9,13 +10,15 @@ const TaskBarItem = (props) => {
 
   return (
     <div
-      className={`task-bar-item ${isActive && "active"} ${isOpen && "open"}`}
+      className={`${styles.taskBarItem} ${isActive && styles.active} ${
+        isOpen && styles.open
+      }`}
       id={`task-bar-item-${props.window.id}`}
       onClick={() => props.unminimizeWindow(props.window)}
     >
-      <div className="bevel">
+      <div className={styles.bevel}>
         <DefaultIcon icon={props.window.icon} small />
-        <div className="title">{props.window.title}</div>
+        <div className={styles.title}>{props.window.title}</div>
       </div>
     </div>
   );

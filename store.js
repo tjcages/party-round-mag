@@ -18,6 +18,10 @@ const store = (set, get) => ({
       top: "20px",
       width: "60vw",
       height: "80vh",
+      mobileLeft: "26vw",
+      mobileTop: "10px",
+      mobileWidth: "74vw",
+      mobileHeight: "50vh",
     },
     {
       id: 1,
@@ -36,6 +40,10 @@ const store = (set, get) => ({
       top: "150px",
       width: "500px",
       height: "490px",
+      mobileLeft: "26vw",
+      mobileTop: "10px",
+      mobileWidth: "74vw",
+      mobileHeight: "50vh",
     },
     {
       id: 2,
@@ -52,6 +60,10 @@ const store = (set, get) => ({
       top: "330px",
       width: "400px",
       height: "400px",
+      mobileLeft: "26vw",
+      mobileTop: "10px",
+      mobileWidth: "74vw",
+      mobileHeight: "50vh",
     },
     {
       id: 3,
