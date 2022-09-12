@@ -18,10 +18,10 @@ const store = (set, get) => ({
       top: "20px",
       width: "60vw",
       height: "80vh",
-      mobileLeft: "26vw",
+      mobileLeft: "22vw",
       mobileTop: "10px",
-      mobileWidth: "74vw",
-      mobileHeight: "50vh",
+      mobileWidth: "78vw",
+      mobileHeight: "60vh",
     },
     {
       id: 1,
@@ -133,6 +133,10 @@ const store = (set, get) => ({
       top: "calc(100vh - 300px)",
       width: "400px",
       height: "230px",
+      mobileLeft: "20px",
+      mobileTop: "55vh",
+      mobileWidth: "86vw",
+      mobileHeight: "100px",
       shortcut: false,
       taskbar: false,
     },
@@ -493,6 +497,10 @@ const store = (set, get) => ({
     newWindows[id].left = left;
     newWindows[id].width = width;
     newWindows[id].height = height;
+    newWindows[id].mobileTop = top;
+    newWindows[id].mobileLeft = left;
+    newWindows[id].mobileWidth = width;
+    newWindows[id].mobileHeight = height;
     set((state) => ({ windows: newWindows }));
   },
   toggleActiveWindow: (id) => {

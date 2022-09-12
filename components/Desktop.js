@@ -27,7 +27,7 @@ const Desktop = (props) => {
   function startup() {
     windows.forEach((window, i) => {
       setTimeout(function () {
-        if (window.open && window.minimized) {
+        if (window.open && window.minimized && !isTablet()) {
           unminimizeWindow(window);
         }
       }, i * 1000);
@@ -35,6 +35,7 @@ const Desktop = (props) => {
   }
 
   function beforeMinimize(window, animatedTitleBar) {
+    console.log("is mobile: " + mobile)
     animatedTitleBar.style.top = mobile ? window.mobileTop : window.top;
     animatedTitleBar.style.left = mobile ? window.mobileLeft : window.left;
     animatedTitleBar.style.width = mobile ? window.mobileWidth : window.width;

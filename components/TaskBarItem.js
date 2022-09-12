@@ -7,10 +7,11 @@ import DefaultIcon from "./DefaultIcon";
 const TaskBarItem = (props) => {
   const isActive = useStore((state) => state.windows[props.window.id].active);
   const isOpen = useStore((state) => state.windows[props.window.id].open);
+  const isMinimized = useStore((state) => state.windows[props.window.id].minimized);
 
   return (
     <div
-      className={`${styles.taskBarItem} ${isActive && styles.active} ${
+      className={`${styles.taskBarItem} ${isActive && !isMinimized && styles.active} ${
         isOpen && styles.open
       }`}
       id={`task-bar-item-${props.window.id}`}

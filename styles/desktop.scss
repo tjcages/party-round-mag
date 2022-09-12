@@ -49,6 +49,12 @@ svg {
   right: 0;
   bottom: 0;
   margin-bottom: 28px;
+
+  @media only screen and (max-width: 600px) {
+    & {
+      top: 8px;
+    }
+  }
 }
 
 .short-cut {
@@ -59,6 +65,13 @@ svg {
   padding: 8px;
   width: 100px;
   margin-bottom: 4px;
+
+  @media only screen and (max-width: 600px) {
+    & {
+      padding: 4px 0;
+      width: 80px;
+    }
+  }
 
   .icon {
     margin-bottom: 6px;

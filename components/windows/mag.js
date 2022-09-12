@@ -11,7 +11,7 @@ const Mag = (props) => {
     <div className={styles.content}>
       <div className={styles.bezel}>
         <div className={styles.header}>
-          <h1>A DROP BY PARTY ROUND</h1>
+          <h1>A DROP BY PARTY&nbsp;ROUND</h1>
         </div>
 
         <div className={styles.magContainer}>
