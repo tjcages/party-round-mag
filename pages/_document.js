@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 export default function Document() {
   return (
@@ -39,17 +40,30 @@ export default function Document() {
           content="Party Round Mag | Vol.001 Get Yours Now"
         />
         <meta property="og:url" content="undefined/" />
-        <meta
-          property="og:image"
-          content="/img/common/preview.jpg"
-        />
+        <meta property="og:image" content="/img/common/preview.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Party Round Mag" />
-        <meta name="twitter:description" content="Party Round Mag Vol.001 | Get Yours Now" />
-        <meta name="twitter:creator" content="@PartyRound" />
         <meta
-          name="twitter:image"
-          content="/img/common/preview.jpg"
+          name="twitter:description"
+          content="Party Round Mag Vol.001 | Get Yours Now"
+        />
+        <meta name="twitter:creator" content="@PartyRound" />
+        <meta name="twitter:image" content="/img/common/preview.jpg" />
+        <Script
+          id="google-analytics"
+          strategy="beforeInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-63CEGYKFMN"
+        />
+         <Script
+          id="google-analytics-gtag"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || []; function gtag()
+            {dataLayer.push(arguments)}
+            gtag('js', new Date()); gtag('config', 'G-63CEGYKFMN');
+  `,
+          }}
         />
       </Head>
       <body>
