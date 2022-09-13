@@ -53,6 +53,7 @@ export default class Terminal extends Component {
     this.listFiles = this.listFiles.bind(this);
     this.catFile = this.catFile.bind(this);
     this.buyFile = this.buyFile.bind(this);
+    this.enterFolder = this.enterFolder.bind(this);
     this.resetInput = this.resetInput.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
 
@@ -68,10 +69,6 @@ export default class Terminal extends Component {
       csv: null,
     };
   }
-
-  // componentDidMount() {
-  //   this.init();
-  // }
 
   componentDidUpdate(props) {
     if (this.props.window.open && !this.state.inited) {
@@ -104,6 +101,7 @@ export default class Terminal extends Component {
       ls: this.listFiles,
       cat: this.catFile,
       buy: this.buyFile,
+      cd: this.enterFolder,
     };
     this.elements.input.addEventListener("keydown", this.onKeyDown);
     this.catFile("readme.md");
@@ -127,6 +125,10 @@ export default class Terminal extends Component {
       this.setState({ buying: true });
     } else
       this.addHistory(`buy: ${fileName}: No such product or drop for sale`);
+  }
+
+  enterFolder(fileName) {
+
   }
 
   purchaseRequest() {

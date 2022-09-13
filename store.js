@@ -219,7 +219,7 @@ const store = (set, get) => ({
       mobileLeft: "2vw",
       mobileTop: "7vh",
       mobileWidth: "96vw",
-      mobileHeight: "70vh",
+      mobileHeight: "40vh",
       shortcut: false,
       taskbar: true,
       experiment: true,

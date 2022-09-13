@@ -75,7 +75,7 @@
   grid-template-rows: [first] 1fr [center] auto [end];
   justify-content: center;
   column-gap: 24px;
-  row-gap: 12px;
+  row-gap: 6px;
   padding: 12px;
   border: 1px dashed #ffffff;
   margin-top: 24px;
@@ -93,11 +93,17 @@
   }
 
   @media only screen and (max-width: 600px) {
+    .graphic {
+      grid-column-start: first;
+      grid-column-end: first;
+      grid-row-start: first;
+      grid-row-end: first;
+    }
     button {
       grid-column-start: first;
       grid-column-end: end;
-      grid-row-start: 2;
-      grid-row-end: 2;
+      grid-row-start: end;
+      grid-row-end: end;
       font-size: 16px;
       margin: 0;
     }
@@ -194,7 +200,7 @@
 }
 
 // Animation settings
-$totalTime: 6s;
+$totalTime: 3s;
 $items: 4;
 $animationSpeed: 2;
 
