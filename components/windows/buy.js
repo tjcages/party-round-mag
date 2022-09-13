@@ -6,6 +6,7 @@ import Button from "../Button";
 
 const Buy = (props) => {
   const openWindow = useStore((state) => state.openWindow);
+  const soldout = useStore((state) => state.soldout);
 
   function handleBuyClicked(e) {
     e.stopPropagation();
@@ -48,9 +49,9 @@ const Buy = (props) => {
                 layout="fill"
               />
             </div>
-            <div className={styles.exclusive}>
+            <div className={`${styles.exclusive} ${soldout && styles.soldout}`}>
               <Image
-                src={"/img/exclusive.png"}
+                src={"/img/soldout.png"}
                 alt="exclusive icon"
                 layout="fill"
               />
@@ -77,7 +78,7 @@ const Buy = (props) => {
             <h2>$0.99</h2>
             <br />
           </div>
-          <Button text="BUY NOW" large onClick={(e) => handleBuyClicked(e)} />
+          <Button text={soldout ? "SOLD OUT" : "BUY NOW"} large onClick={(e) => handleBuyClicked(e)} disabled={soldout} />
         </div>
       </div>
     </div>

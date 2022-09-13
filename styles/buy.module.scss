@@ -134,10 +134,21 @@
   position: absolute;
   top: 120px;
   left: 50px;
-  width: 120px;
+  width: 100px;
   height: 30px;
   transform: rotate(20deg);
   opacity: 0;
+
+  &.soldout {
+    opacity: 1;
+  }
+
+  @media only screen and (max-width: 600px) {
+    & {
+      top: 76px;
+      left: 20px;
+    }
+  }
 }
 
 .exclusive:before {

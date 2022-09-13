@@ -2,6 +2,7 @@ import create from "zustand";
 import { devtools } from "zustand/middleware";
 
 const store = (set, get) => ({
+  soldout: false,
   windows: [
     {
       id: 0,
