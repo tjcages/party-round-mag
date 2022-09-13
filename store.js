@@ -2,6 +2,10 @@ import create from "zustand";
 import { devtools } from "zustand/middleware";
 
 const store = (set, get) => ({
+  loaded: false,
+  setLoaded: () => {
+    set((state) => ({ loaded: true }));
+  },
   soldout: false,
   windows: [
     {

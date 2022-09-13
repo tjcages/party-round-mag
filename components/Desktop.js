@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import useStore from "../store";
 import { isTablet } from "../utils/agents";
 
@@ -8,6 +9,8 @@ import Shortcuts from "../components/Shortcuts";
 import TaskBar from "../components/TaskBar";
 
 const Desktop = (props) => {
+  const loaded = useStore((state) => state.loaded);
+  const setLoaded = useStore((state) => state.setLoaded);
   const windows = useStore((state) => state.windows);
   const openWindow = useStore((state) => state.openWindow);
   const hideWindow = useStore((state) => state.hideWindow);
@@ -18,7 +21,10 @@ const Desktop = (props) => {
   const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
-    startup();
+    setTimeout(function () {
+      startup();
+      setLoaded();
+    }, 2000);
 
     const isMobile = isTablet();
     setMobile(isMobile);
@@ -172,6 +178,17 @@ const Desktop = (props) => {
         );
       })}
       <TaskBar unminimizeWindow={unminimizeWindow} />
+
+      {!loaded && (
+        <div className="loading">
+          <Image
+            src={"/img/hourglass.webp"}
+            alt="loading hourglass"
+            width={"100"}
+            height={"100"}
+          />
+        </div>
+      )}
     </div>
   );
 };
