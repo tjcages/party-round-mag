@@ -152,6 +152,12 @@ export default class Terminal extends Component {
         expDate: null,
         csv: null,
       });
+    } 
+    if (this.elements && this.elements.input) {
+      this.elements.input.blur();
+      setTimeout(() => {
+        this.elements.input.focus();
+      }, 1)
     }
   }
 
