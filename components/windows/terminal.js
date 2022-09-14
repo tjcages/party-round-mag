@@ -386,15 +386,15 @@ Your copy of Party Round Mag will be shipped shortly.
       case "cc":
         return (
           <input
-            title="address"
-            id="address"
+            title="cc"
+            id="cc"
             className={styles.input}
-            type="text"
-            autoComplete="billing street-address"
+            type="tel"
+            autoComplete="cc-number"
             inputMode="text"
-            pattern="regexp"
-            maxLength="100"
-            placeholder="335 Madison Ave New York, NY 10017"
+            pattern="[0-9s]{13,19}"
+            maxLength="19"
+            placeholder="XXXX XXXX XXXX XXXX"
           />
         );
       case "address":
