@@ -161,17 +161,7 @@ export default class Terminal extends Component {
     this.history = [];
     this.elements = {
       defaultInput: createRef(),
-      nameInput: createRef(),
-      emailInput: createRef(),
-      addressInput: createRef(),
       ccInput: createRef(),
-      expInput: createRef(),
-      cscInput: createRef(),
-      inputs: [
-        document.querySelector("#input"),
-        document.querySelector("#cardNumber"),
-        document.querySelector("#address"),
-      ],
       terminal: document.querySelector("#content"),
       outputContainer: document.querySelector("#outputContainer"),
     };
@@ -183,9 +173,6 @@ export default class Terminal extends Component {
       buy: this.buyFile,
       cd: this.enterFolder,
     };
-    // this.elements.inputs.forEach((input) =>
-    //   input.addEventListener("keydown", this.onKeyDown)
-    // );
     this.catFile("readme.md");
   }
 
@@ -193,16 +180,6 @@ export default class Terminal extends Component {
     this.history = [];
     this.elements.outputContainer.innerHTML = "";
   }
-
-  // refocusInput() {
-  //   if (this.elements && this.elements.input) {
-  //     var that = this;
-  //     this.elements.input.blur();
-  //     setTimeout(() => {
-  //       that.elements.input.focus();
-  //     }, 1);
-  //   }
-  // }
 
   catFile(fileName) {
     if (fileName in fileSystem && fileName !== "mag")
@@ -312,17 +289,9 @@ Your copy of Party Round Mag will be shipped shortly.
   }
 
   clearInput() {
-    if (this.elements.defaultInput.current) this.elements.defaultInput.current.value = "";
-    if (this.elements.nameInput.current) this.elements.nameInput.current.value = "";
-    if (this.elements.emailInput.current) this.elements.emailInput.current.value = "";
-    if (this.elements.addressInput.current) this.elements.addressInput.current.value = "";
+    if (this.elements.defaultInput.current)
+      this.elements.defaultInput.current.value = "";
     if (this.elements.ccInput.current) this.elements.ccInput.current.value = "";
-    if (this.elements.expInput.current) this.elements.expInput.current.value = "";
-    if (this.elements.cscInput.current) this.elements.cscInput.current.value = "";
-    // console.log(this.elements.inputs);
-    // this.elements.inputs.forEach((input) => {
-    //   if (input) input.value = "";
-    // });
   }
 
   onKeyDown(e) {
@@ -428,95 +397,6 @@ Your copy of Party Round Mag will be shipped shortly.
             />
           </>
         );
-      // case "exp":
-      //   return (
-      //     <>
-      //       <label className={styles.hiddenLabel} htmlFor="cardExpiration">
-      //         Expiration Date
-      //       </label>
-      //       <input
-      //         ref={this.elements && this.elements.expInput}
-      //         name="cardExpiration"
-      //         id="cardExpiration"
-      //         className={styles.input}
-      //         type="regexp"
-      //         autoFocus={true}
-      //         autoComplete="cc-exp"
-      //         inputMode="text"
-      //         pattern="(0[1-9]|1[0-2])/[0-9]{2}"
-      //         maxLength="5"
-      //         placeholder="XX/XX"
-      //         onKeyDown={(e) => this.onKeyDown(e)}
-      //       />
-      //     </>
-      //   );
-      // case "csc":
-      //   return (
-      //     <>
-      //       <label className={styles.hiddenLabel} htmlFor="cardSecurityCode">
-      //         Security Code
-      //       </label>
-      //       <input
-      //         ref={this.elements && this.elements.cscInput}
-      //         name="cardSecurityCode"
-      //         id="cardSecurityCode"
-      //         className={styles.input}
-      //         type="regexp"
-      //         autoFocus={true}
-      //         autoComplete="cc-csc"
-      //         inputMode="text"
-      //         pattern="regexp"
-      //         maxLength="4"
-      //         placeholder="XXX"
-      //         onKeyDown={(e) => this.onKeyDown(e)}
-      //       />
-      //     </>
-      //   );
-      // case "address":
-      //   return (
-      //     <>
-      //       <label className={styles.hiddenLabel} htmlFor="shippingAddress">
-      //         Shipping Address
-      //       </label>
-      //       <input
-      //         ref={this.elements && this.elements.addressInput}
-      //         title="shippingAddress"
-      //         id="shippingAddress"
-      //         className={styles.input}
-      //         type="regexp"
-      //         autoFocus={true}
-      //         autoComplete="billing street-address"
-      //         inputMode="text"
-      //         pattern="regexp"
-      //         maxLength="100"
-      //         placeholder="335 Madison Ave New York, NY 10017"
-      //         onKeyDown={(e) => this.onKeyDown(e)}
-      //       />
-      //     </>
-      //   );
-      // case "name":
-      //   return (
-      //     <>
-      //       <label className={styles.hiddenLabel} htmlFor="cardName">
-      //         Name on Credit Card
-      //       </label>
-      //       <input
-      //         ref={this.elements && this.elements.nameInput}
-      //         title="cardName"
-      //         id="cardName"
-      //         className={styles.input}
-      //         type="regexp"
-      //         autoFocus={true}
-      //         autoComplete="name cc-name"
-      //         inputMode="text"
-      //         pattern="regexp"
-      //         maxLength="100"
-      //         placeholder="josh appleseed"
-      //         onKeyDown={(e) => this.onKeyDown(e)}
-      //       />
-      //     </>
-      //   );
-
       default:
         return (
           <input
