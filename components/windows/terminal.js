@@ -285,7 +285,7 @@ Your copy of Party Round Mag will be shipped shortly.
     }
 
     this.elements.outputContainer.appendChild(outputSpan);
-    this.refocusInput();
+    // this.refocusInput();
   }
 
   listFiles(dir) {
