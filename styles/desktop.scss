@@ -34,6 +34,7 @@ svg {
   height: 100vh;
   background-image: url("/img/background.png");
   background-size: cover;
+  overflow: hidden;
 
   .checkers {
     background-image: url("data:image/svg+xml,%3Csvg%20width='4'%20height='4'%20viewBox='0%200%204%204'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3E%3Crect%20width='2'%20height='2'%20fill='white'/%3E%3Crect%20x='2'%20y='2'%20width='2'%20height='2'%20fill='white'/%3E%3C/svg%3E%0A");

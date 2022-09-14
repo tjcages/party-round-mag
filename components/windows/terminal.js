@@ -1,5 +1,6 @@
 import React, { Component, createRef } from "react";
 import styles from "../../styles/terminal.module.scss";
+import { isTablet } from "../../utils/agents";
 
 const ENTER_KEY = 13;
 const fileSystem = {
@@ -216,10 +217,30 @@ Your copy of Party Round Mag will be shipped shortly.
         `);
       }
       that.scrollToBottom();
+
+      const isMobile = isTablet();
+      if (isMobile) {
+        if (that.elements.defaultInput.current) {
+          that.elements.defaultInput.current.value = "";
+          that.elements.defaultInput.current.blur();
+        }
+        if (that.elements.ccInput.current) {
+          that.elements.ccInput.current.value = "";
+          that.elements.ccInput.current.blur();
+        }
+      }
     }, 1000);
   }
 
   resetInput() {
+    if (this.elements.defaultInput.current) {
+      this.elements.defaultInput.current.value = "";
+      this.elements.defaultInput.current.blur();
+    }
+    if (this.elements.ccInput.current) {
+      this.elements.ccInput.current.value = "";
+      this.elements.ccInput.current.blur();
+    }
     this.setState({
       allowEditing: true,
       buying: false,
