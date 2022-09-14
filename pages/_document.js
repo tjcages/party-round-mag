@@ -54,7 +54,7 @@ export default function Document() {
           strategy="beforeInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-63CEGYKFMN"
         />
-         <Script
+        <Script
           id="google-analytics-gtag"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{

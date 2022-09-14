@@ -394,6 +394,7 @@ Your copy of Party Round Mag will be shipped shortly.
               maxLength="19"
               placeholder="XXXX XXXX XXXX XXXX"
               onKeyDown={(e) => this.onKeyDown(e)}
+              maximumScale={1}
             />
           </>
         );
