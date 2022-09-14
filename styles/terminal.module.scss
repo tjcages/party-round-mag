@@ -51,6 +51,11 @@
   align-items: center;
 }
 
+.hiddenLabel {
+  position: absolute;
+  visibility: hidden;
+}
+
 .input {
   border: none;
   padding: 0;

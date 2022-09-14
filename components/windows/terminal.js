@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import styles from "../../styles/terminal.module.scss";
 
 const ENTER_KEY = 13;
@@ -160,11 +160,7 @@ export default class Terminal extends Component {
   init() {
     this.history = [];
     this.elements = {
-      inputs: [
-        ...document.querySelectorAll("[id^='input']"),
-        ...document.querySelectorAll("[id^='cardNumber']"),
-        ...document.querySelectorAll("[id^='address']"),
-      ],
+      input: createRef(),
       terminal: document.querySelector("#content"),
       outputContainer: document.querySelector("#outputContainer"),
     };
@@ -176,9 +172,6 @@ export default class Terminal extends Component {
       buy: this.buyFile,
       cd: this.enterFolder,
     };
-    // this.elements.inputs.forEach((input) =>
-    //   input.addEventListener("keydown", this.onKeyDown)
-    // );
     this.catFile("readme.md");
   }
 
@@ -186,16 +179,6 @@ export default class Terminal extends Component {
     this.history = [];
     this.elements.outputContainer.innerHTML = "";
   }
-
-  // refocusInput() {
-  //   if (this.elements && this.elements.input) {
-  //     var that = this;
-  //     this.elements.input.blur();
-  //     setTimeout(() => {
-  //       that.elements.input.focus();
-  //     }, 1);
-  //   }
-  // }
 
   catFile(fileName) {
     if (fileName in fileSystem && fileName !== "mag")
@@ -305,8 +288,11 @@ Your copy of Party Round Mag will be shipped shortly.
   }
 
   clearInput() {
-    console.log(this.elements.inputs);
-    this.elements.inputs.forEach((input) => (input.value = ""));
+    this.elements.input.current.value = "";
+    // console.log(this.elements.inputs);
+    // this.elements.inputs.forEach((input) => {
+    //   if (input) input.value = "";
+    // });
   }
 
   onKeyDown(e) {
@@ -380,7 +366,28 @@ Your copy of Party Round Mag will be shipped shortly.
             <div id="outputContainer" className={styles.outputContainer}></div>
             <div className={styles.currentLine}>
               <span className={styles.prompt}>$</span>
-              <div className={styles.inputContainer}>{this.selectInput()}</div>
+              <div className={styles.inputContainer}>
+                <label
+                  className={styles.hiddenLabel}
+                  htmlFor={this.state.config.id}
+                >
+                  {this.state.config.id}
+                </label>
+                <input
+                  ref={this.elements && this.elements.input}
+                  title={this.state.config.id}
+                  id={this.state.config.id}
+                  className={styles.input}
+                  autoFocus={true}
+                  type={this.state.config.type}
+                  inputMode={this.state.config.inputMode}
+                  pattern={this.state.config.pattern}
+                  autoComplete={this.state.config.autoComplete}
+                  maxLength={this.state.config.maxLength}
+                  placeholder={this.state.config.placeholder}
+                  onKeyDown={(e) => this.onKeyDown(e)}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -393,7 +400,7 @@ Your copy of Party Round Mag will be shipped shortly.
       case "cc":
         return (
           <>
-            <label style={{ visibility: "hidden" }} htmlFor="cardNumber">
+            <label className={styles.hiddenLabel} htmlFor="cardNumber">
               Card Number
             </label>
             <input
@@ -413,19 +420,24 @@ Your copy of Party Round Mag will be shipped shortly.
         );
       case "address":
         return (
-          <input
-            title="address"
-            id="address"
-            className={styles.input}
-            type="regexp"
-            autoFocus={true}
-            autoComplete="billing street-address"
-            inputMode="text"
-            pattern="regexp"
-            maxLength="100"
-            placeholder="335 Madison Ave New York, NY 10017"
-            onKeyDown={(e) => this.onKeyDown(e)}
-          />
+          <>
+            <label className={styles.hiddenLabel} htmlFor="address">
+              Shipping Address
+            </label>
+            <input
+              title="address"
+              id="address"
+              className={styles.input}
+              type="regexp"
+              autoFocus={true}
+              autoComplete="billing street-address"
+              inputMode="text"
+              pattern="regexp"
+              maxLength="100"
+              placeholder="335 Madison Ave New York, NY 10017"
+              onKeyDown={(e) => this.onKeyDown(e)}
+            />
+          </>
         );
       default:
         return (
