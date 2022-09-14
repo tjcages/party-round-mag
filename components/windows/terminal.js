@@ -44,6 +44,7 @@ const success = `*
 
 const inputConfig = {
   default: {
+    id: "input",
     type: "text",
     autoComplete: "off",
     inputMode: "text",
@@ -52,6 +53,7 @@ const inputConfig = {
     placeholder: "",
   },
   name: {
+    id: "name",
     type: "text",
     autoComplete: "cc-name",
     inputMode: "text",
@@ -60,14 +62,16 @@ const inputConfig = {
     placeholder: "josh appleseed",
   },
   email: {
+    id: "email",
     type: "email",
     autoComplete: "email",
     inputMode: "email",
-    pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$",
+    pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$",
     maxLength: "100",
     placeholder: "josh@partyround.com",
   },
   address: {
+    id: "address",
     type: "text",
     autoComplete: "street-address",
     inputMode: "text",
@@ -76,14 +80,16 @@ const inputConfig = {
     placeholder: "335 Madison Ave New York, NY 10017",
   },
   cc: {
+    id: "cc",
     type: "tel",
     autoComplete: "cc-number",
     inputMode: "numeric",
-    pattern: "[0-9\s]{13,19}",
+    pattern: "[0-9s]{13,19}",
     maxLength: "19",
     placeholder: "XXXX XXXX XXXX XXXX",
   },
   exp: {
+    id: "exp",
     type: "numeric",
     autoComplete: "cc-exp",
     inputMode: "numeric",
@@ -92,6 +98,7 @@ const inputConfig = {
     placeholder: "XX/XX",
   },
   csv: {
+    id: "csv",
     type: "numeric",
     autoComplete: "cc-csc",
     inputMode: "numeric",
@@ -355,9 +362,8 @@ Your copy of Party Round Mag will be shipped shortly.
               <span className={styles.prompt}>$</span>
               <div className={styles.inputContainer}>
                 <input
-                  id="input"
+                  id={this.state.config.id}
                   className={styles.input}
-                  // type="text"
                   autoFocus={true}
                   type={this.state.config.type}
                   inputMode={this.state.config.inputMode}
