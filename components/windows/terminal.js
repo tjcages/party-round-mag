@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import styles from "../../styles/terminal.module.scss";
 
 const ENTER_KEY = 13;
@@ -97,7 +97,7 @@ const inputConfig = {
     maxLength: "5",
     placeholder: "XX/XX",
   },
-  csv: {
+  csc: {
     id: "csv",
     type: "cc-csc",
     autoComplete: "cc-csc",
@@ -160,6 +160,13 @@ export default class Terminal extends Component {
   init() {
     this.history = [];
     this.elements = {
+      defaultInput: createRef(),
+      nameInput: createRef(),
+      emailInput: createRef(),
+      addressInput: createRef(),
+      ccInput: createRef(),
+      expInput: createRef(),
+      cscInput: createRef(),
       inputs: [
         document.querySelector("#input"),
         document.querySelector("#cardNumber"),
@@ -305,10 +312,17 @@ Your copy of Party Round Mag will be shipped shortly.
   }
 
   clearInput() {
-    console.log(this.elements.inputs);
-    this.elements.inputs.forEach((input) => {
-      if (input) input.value = "";
-    });
+    if (this.elements.defaultInput.current) this.elements.defaultInput.current.value = "";
+    if (this.elements.nameInput.current) this.elements.nameInput.current.value = "";
+    if (this.elements.emailInput.current) this.elements.emailInput.current.value = "";
+    if (this.elements.addressInput.current) this.elements.addressInput.current.value = "";
+    if (this.elements.ccInput.current) this.elements.ccInput.current.value = "";
+    if (this.elements.expInput.current) this.elements.expInput.current.value = "";
+    if (this.elements.cscInput.current) this.elements.cscInput.current.value = "";
+    // console.log(this.elements.inputs);
+    // this.elements.inputs.forEach((input) => {
+    //   if (input) input.value = "";
+    // });
   }
 
   onKeyDown(e) {
@@ -346,7 +360,7 @@ Your copy of Party Round Mag will be shipped shortly.
         this.setState({ ccNumber: inputText, config: inputConfig["exp"] });
         this.addHistory(`Please enter your #expiration date as MM/YY:#`);
       } else if (this.state.expDate == null) {
-        this.setState({ expDate: inputText, config: inputConfig["csv"] });
+        this.setState({ expDate: inputText, config: inputConfig["csc"] });
         this.addHistory(`Please enter your #security code:#`);
       } else if (this.state.csv == null) {
         this.setState({ csv: inputText, config: inputConfig["default"] });
@@ -399,6 +413,7 @@ Your copy of Party Round Mag will be shipped shortly.
               Card Number
             </label>
             <input
+              ref={this.elements && this.elements.ccInput}
               name="cardNumber"
               id="cardNumber"
               className={styles.input}
@@ -420,6 +435,7 @@ Your copy of Party Round Mag will be shipped shortly.
               Card Expiration Date
             </label>
             <input
+              ref={this.elements && this.elements.expInput}
               name="cardExpiration"
               id="cardExpiration"
               className={styles.input}
@@ -434,13 +450,14 @@ Your copy of Party Round Mag will be shipped shortly.
             />
           </>
         );
-      case "csv":
+      case "csc":
         return (
           <>
             <label className={styles.hiddenLabel} htmlFor="cardSecurityCode">
               Card Security Code
             </label>
             <input
+              ref={this.elements && this.elements.cscInput}
               name="cardSecurityCode"
               id="cardSecurityCode"
               className={styles.input}
@@ -455,30 +472,55 @@ Your copy of Party Round Mag will be shipped shortly.
             />
           </>
         );
-      // case "address":
-      //   return (
-      //     <>
-      //       <label style={styles.hiddenLabel} htmlFor="shippingAddress">
-      //         Shipping Address
-      //       </label>
-      //       <input
-      //         title="shippingAddress"
-      //         id="shippingAddress"
-      //         className={styles.input}
-      //         type="regexp"
-      //         autoFocus={true}
-      //         autoComplete="billing street-address"
-      //         inputMode="text"
-      //         pattern="regexp"
-      //         maxLength="100"
-      //         placeholder="335 Madison Ave New York, NY 10017"
-      //         onKeyDown={(e) => this.onKeyDown(e)}
-      //       />
-      //     </>
-      //   );
+      case "address":
+        return (
+          <>
+            <label className={styles.hiddenLabel} htmlFor="shippingAddress">
+              Shipping Address
+            </label>
+            <input
+              ref={this.elements && this.elements.addressInput}
+              title="shippingAddress"
+              id="shippingAddress"
+              className={styles.input}
+              type="regexp"
+              autoFocus={true}
+              autoComplete="billing street-address"
+              inputMode="text"
+              pattern="regexp"
+              maxLength="100"
+              placeholder="335 Madison Ave New York, NY 10017"
+              onKeyDown={(e) => this.onKeyDown(e)}
+            />
+          </>
+        );
+      case "name":
+        return (
+          <>
+            <label className={styles.hiddenLabel} htmlFor="cardName">
+              Name on Credit Card
+            </label>
+            <input
+              ref={this.elements && this.elements.nameInput}
+              title="cardName"
+              id="cardName"
+              className={styles.input}
+              type="regexp"
+              autoFocus={true}
+              autoComplete="name cc-name"
+              inputMode="text"
+              pattern="regexp"
+              maxLength="100"
+              placeholder="josh appleseed"
+              onKeyDown={(e) => this.onKeyDown(e)}
+            />
+          </>
+        );
+
       default:
         return (
           <input
+            ref={this.elements && this.elements.defaultInput}
             title={this.state.config.id}
             id={this.state.config.id}
             className={styles.input}
