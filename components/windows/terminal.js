@@ -55,7 +55,7 @@ const inputConfig = {
   name: {
     id: "name",
     type: "text",
-    autoComplete: "cc-name",
+    autoComplete: "name",
     inputMode: "text",
     pattern: "regexp",
     maxLength: "100",
@@ -64,7 +64,7 @@ const inputConfig = {
   email: {
     id: "email",
     type: "email",
-    autoComplete: "email",
+    autoComplete: "home email",
     inputMode: "email",
     pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$",
     maxLength: "100",
@@ -73,7 +73,7 @@ const inputConfig = {
   address: {
     id: "address",
     type: "text",
-    autoComplete: "street-address",
+    autoComplete: "billing street-address",
     inputMode: "text",
     pattern: "regexp",
     maxLength: "100",
