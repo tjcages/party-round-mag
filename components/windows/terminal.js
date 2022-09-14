@@ -233,14 +233,6 @@ Your copy of Party Round Mag will be shipped shortly.
   }
 
   resetInput() {
-    if (this.elements.defaultInput.current) {
-      this.elements.defaultInput.current.value = "";
-      this.elements.defaultInput.current.blur();
-    }
-    if (this.elements.ccInput.current) {
-      this.elements.ccInput.current.value = "";
-      this.elements.ccInput.current.blur();
-    }
     this.setState({
       allowEditing: true,
       buying: false,
