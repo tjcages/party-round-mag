@@ -434,6 +434,27 @@ Your copy of Party Round Mag will be shipped shortly.
             />
           </>
         );
+      case "csv":
+        return (
+          <>
+            <label className={styles.hiddenLabel} htmlFor="cardSecurityCode">
+              Card Security Code
+            </label>
+            <input
+              name="cardSecurityCode"
+              id="cardSecurityCode"
+              className={styles.input}
+              type="regexp"
+              autoFocus={true}
+              autoComplete="cc-csc"
+              inputMode="text"
+              pattern="regexp"
+              maxLength="4"
+              placeholder="XXX"
+              onKeyDown={(e) => this.onKeyDown(e)}
+            />
+          </>
+        );
       // case "address":
       //   return (
       //     <>
