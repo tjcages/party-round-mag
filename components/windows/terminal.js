@@ -81,9 +81,9 @@ const inputConfig = {
   },
   cc: {
     id: "cc",
-    type: "text",
+    type: "tel",
     autoComplete: "cc-number",
-    inputMode: "numeric",
+    inputMode: "text",
     pattern: "[0-9s]{13,19}",
     maxLength: "19",
     placeholder: "XXXX XXXX XXXX XXXX",
@@ -92,7 +92,7 @@ const inputConfig = {
     id: "exp",
     type: "numeric",
     autoComplete: "cc-exp",
-    inputMode: "numeric",
+    inputMode: "text",
     pattern: "(0[1-9]|1[0-2])/[0-9]{2}",
     maxLength: "5",
     placeholder: "XX/XX",
@@ -101,7 +101,7 @@ const inputConfig = {
     id: "csv",
     type: "numeric",
     autoComplete: "cc-csc",
-    inputMode: "numeric",
+    inputMode: "text",
     pattern: "regexp",
     maxLength: "4",
     placeholder: "XXX",
@@ -157,7 +157,7 @@ export default class Terminal extends Component {
       this.elements.input.blur();
       setTimeout(() => {
         this.elements.input.focus();
-      }, 1)
+      }, 10)
     }
   }
 
