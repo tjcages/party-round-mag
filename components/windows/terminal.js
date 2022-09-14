@@ -80,7 +80,7 @@ const inputConfig = {
     placeholder: "335 Madison Ave New York, NY 10017",
   },
   cc: {
-    id: "cc",
+    id: "cardNumber-CC",
     type: "cc-number",
     autoComplete: "cc-number",
     inputMode: "text",
@@ -89,7 +89,7 @@ const inputConfig = {
     placeholder: "XXXX XXXX XXXX XXXX",
   },
   exp: {
-    id: "exp",
+    id: "cardExp",
     type: "cc-exp",
     autoComplete: "cc-exp",
     inputMode: "text",
