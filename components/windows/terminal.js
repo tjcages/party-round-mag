@@ -81,7 +81,7 @@ const inputConfig = {
   },
   cc: {
     id: "cc",
-    type: "tel",
+    type: "text",
     autoComplete: "cc-number",
     inputMode: "numeric",
     pattern: "[0-9s]{13,19}",
