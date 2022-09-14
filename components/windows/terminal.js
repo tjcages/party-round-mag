@@ -395,7 +395,7 @@ Your copy of Party Round Mag will be shipped shortly.
       case "cc":
         return (
           <>
-            <label style={{ position: "absolute", visibility: "hidden" }} htmlFor="cardNumber">
+            <label style={styles.hiddenLabel} htmlFor="cardNumber">
               Card Number
             </label>
             <input
@@ -413,22 +413,48 @@ Your copy of Party Round Mag will be shipped shortly.
             />
           </>
         );
-      case "address":
+      case "exp":
         return (
-          <input
-            title="address"
-            id="address"
-            className={styles.input}
-            type="regexp"
-            autoFocus={true}
-            autoComplete="billing street-address"
-            inputMode="text"
-            pattern="regexp"
-            maxLength="100"
-            placeholder="335 Madison Ave New York, NY 10017"
-            onKeyDown={(e) => this.onKeyDown(e)}
-          />
+          <>
+            <label style={styles.hiddenLabel} htmlFor="cardExpiration">
+              Card Expiration Date
+            </label>
+            <input
+              name="cardExpiration"
+              id="cardExpiration"
+              className={styles.input}
+              type="regexp"
+              autoFocus={true}
+              autoComplete="cc-exp"
+              inputMode="text"
+              pattern="(0[1-9]|1[0-2])/[0-9]{2}"
+              maxLength="5"
+              placeholder="XX/XX"
+              onKeyDown={(e) => this.onKeyDown(e)}
+            />
+          </>
         );
+      // case "address":
+      //   return (
+      //     <>
+      //       <label style={styles.hiddenLabel} htmlFor="shippingAddress">
+      //         Shipping Address
+      //       </label>
+      //       <input
+      //         title="shippingAddress"
+      //         id="shippingAddress"
+      //         className={styles.input}
+      //         type="regexp"
+      //         autoFocus={true}
+      //         autoComplete="billing street-address"
+      //         inputMode="text"
+      //         pattern="regexp"
+      //         maxLength="100"
+      //         placeholder="335 Madison Ave New York, NY 10017"
+      //         onKeyDown={(e) => this.onKeyDown(e)}
+      //       />
+      //     </>
+      //   );
       default:
         return (
           <input
