@@ -7,8 +7,13 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 12px;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -98,7 +103,7 @@ svg {
 }
 
 .window {
-  position: absolute;
+  position: fixed;
   border-top: 1px solid #dfdfdf;
   border-left: 1px solid #dfdfdf;
   border-bottom: 1px solid #000000;
@@ -326,6 +331,10 @@ svg {
     border-left: 2px solid #dfdfdf;
     border-bottom: 2px solid #7f7f7f;
     border-right: 2px solid #7f7f7f;
+  }
+
+  &.mid {
+    margin-left: 2px;
   }
 
   &.close {

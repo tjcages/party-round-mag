@@ -91,7 +91,7 @@ const inputConfig = {
   },
   exp: {
     id: "exp",
-    type: "cc-exp",
+    type: "number",
     autoComplete: "cc-exp",
     inputMode: "text",
     pattern: "(0[1-9]|1[0-2])/[0-9]{2}",
@@ -100,7 +100,7 @@ const inputConfig = {
   },
   csc: {
     id: "csv",
-    type: "cc-csc",
+    type: "number",
     autoComplete: "cc-csc",
     inputMode: "text",
     pattern: "regexp",
@@ -384,7 +384,7 @@ Your copy of Party Round Mag will be shipped shortly.
             <div id="outputContainer" className={styles.outputContainer}></div>
             <div className={styles.currentLine}>
               <span className={styles.prompt}>$</span>
-              <div className={styles.inputContainer}>{this.selectInput()}</div>
+              <div className={styles.inputContainer}>{this.selectInput(this.state.config)}</div>
             </div>
           </div>
         </div>
@@ -392,8 +392,8 @@ Your copy of Party Round Mag will be shipped shortly.
     ) : null;
   }
 
-  selectInput() {
-    switch (this.state.config.id) {
+  selectInput(config) {
+    switch (config.id) {
       case "cc":
         return (
           <>
@@ -421,16 +421,16 @@ Your copy of Party Round Mag will be shipped shortly.
         return (
           <input
             ref={this.elements && this.elements.defaultInput}
-            title={this.state.config.id}
-            id={this.state.config.id}
+            title={config.id}
+            id={config.id}
             className={styles.input}
             autoFocus={true}
-            type={this.state.config.type}
-            inputMode={this.state.config.inputMode}
-            pattern={this.state.config.pattern}
-            autoComplete={this.state.config.autoComplete}
-            maxLength={this.state.config.maxLength}
-            placeholder={this.state.config.placeholder}
+            type={config.type}
+            inputMode={config.inputMode}
+            pattern={config.pattern}
+            autoComplete={config.autoComplete}
+            maxLength={config.maxLength}
+            placeholder={config.placeholder}
             onKeyDown={(e) => this.onKeyDown(e)}
           />
         );

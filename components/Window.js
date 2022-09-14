@@ -177,7 +177,7 @@ const Window = (props) => {
             </button>
           )}
           <button
-            className="button maximize"
+            className="button maximize mid"
             onClick={() => {
               if (isMaximized) {
                 props.unmaximizeWindow(props.window);
