@@ -395,7 +395,7 @@ Your copy of Party Round Mag will be shipped shortly.
       case "cc":
         return (
           <>
-            <label style={styles.hiddenLabel} htmlFor="cardNumber">
+            <label className={styles.hiddenLabel} htmlFor="cardNumber">
               Card Number
             </label>
             <input
@@ -416,7 +416,7 @@ Your copy of Party Round Mag will be shipped shortly.
       case "exp":
         return (
           <>
-            <label style={styles.hiddenLabel} htmlFor="cardExpiration">
+            <label className={styles.hiddenLabel} htmlFor="cardExpiration">
               Card Expiration Date
             </label>
             <input
