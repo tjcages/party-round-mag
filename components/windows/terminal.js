@@ -81,7 +81,7 @@ const inputConfig = {
   },
   cc: {
     id: "cc",
-    type: "tel",
+    type: "cc-number",
     autoComplete: "cc-number",
     inputMode: "text",
     pattern: "[0-9s]{13,19}",
@@ -90,7 +90,7 @@ const inputConfig = {
   },
   exp: {
     id: "exp",
-    type: "numeric",
+    type: "cc-exp",
     autoComplete: "cc-exp",
     inputMode: "text",
     pattern: "(0[1-9]|1[0-2])/[0-9]{2}",
@@ -99,7 +99,7 @@ const inputConfig = {
   },
   csv: {
     id: "csv",
-    type: "numeric",
+    type: "cc-csc",
     autoComplete: "cc-csc",
     inputMode: "text",
     pattern: "regexp",
@@ -115,6 +115,7 @@ export default class Terminal extends Component {
     this.init = this.init.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.clearHistory = this.clearHistory.bind(this);
+    this.refocusInput = this.refocusInput.bind(this);
     this.addHistory = this.addHistory.bind(this);
     this.listFiles = this.listFiles.bind(this);
     this.catFile = this.catFile.bind(this);
@@ -152,12 +153,6 @@ export default class Terminal extends Component {
         expDate: null,
         csv: null,
       });
-    } 
-    if (this.elements && this.elements.input) {
-      this.elements.input.blur();
-      setTimeout(() => {
-        this.elements.input.focus();
-      }, 10)
     }
   }
 
@@ -183,6 +178,16 @@ export default class Terminal extends Component {
   clearHistory() {
     this.history = [];
     this.elements.outputContainer.innerHTML = "";
+  }
+
+  refocusInput() {
+    if (this.elements && this.elements.input) {
+      var that = this;
+      this.elements.input.blur();
+      setTimeout(() => {
+        that.elements.input.focus();
+      }, 1);
+    }
   }
 
   catFile(fileName) {
@@ -280,6 +285,7 @@ Your copy of Party Round Mag will be shipped shortly.
     }
 
     this.elements.outputContainer.appendChild(outputSpan);
+    this.refocusInput();
   }
 
   listFiles(dir) {
@@ -368,6 +374,7 @@ Your copy of Party Round Mag will be shipped shortly.
               <span className={styles.prompt}>$</span>
               <div className={styles.inputContainer}>
                 <input
+                  title={this.state.config.id}
                   id={this.state.config.id}
                   className={styles.input}
                   autoFocus={true}
