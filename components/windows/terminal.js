@@ -116,7 +116,6 @@ export default class Terminal extends Component {
     this.init = this.init.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.clearHistory = this.clearHistory.bind(this);
-    // this.refocusInput = this.refocusInput.bind(this);
     this.addHistory = this.addHistory.bind(this);
     this.listFiles = this.listFiles.bind(this);
     this.catFile = this.catFile.bind(this);
@@ -125,6 +124,7 @@ export default class Terminal extends Component {
     this.resetInput = this.resetInput.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
     this.selectInput = this.selectInput.bind(this);
+    this.detectFocus = this.detectFocus.bind(this);
 
     this.state = {
       inited: false,
@@ -307,6 +307,12 @@ Your copy of Party Round Mag will be shipped shortly.
     if (this.elements.ccInput.current) this.elements.ccInput.current.value = "";
   }
 
+  detectFocus() {
+    if (this.elements.defaultInput.current)
+      this.elements.defaultInput.current.focus();
+    if (this.elements.ccInput.current) this.elements.ccInput.current.focus();
+  }
+
   onKeyDown(e) {
     // Only respond to Enter key presses
     if (e.keyCode !== ENTER_KEY) return;
@@ -372,7 +378,7 @@ Your copy of Party Round Mag will be shipped shortly.
       <div id="content" className={styles.content}>
         <div
           className={styles.bezel}
-          onClick={() => this.elements.input.focus()}
+          onClick={() => this.detectFocus()}
         >
           <div id="terminal" className={styles.terminal}>
             <div id="outputContainer" className={styles.outputContainer}></div>
