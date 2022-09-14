@@ -395,12 +395,12 @@ Your copy of Party Round Mag will be shipped shortly.
       case "cc":
         return (
           <>
-            <label className={styles.hiddenLabel} htmlFor="cardNumber">
+            <label className={styles.hiddenLabel} htmlFor="cardNumber-CC">
               Card Number
             </label>
             <input
               name="cardNumber"
-              id="cardNumber"
+              id="cardNumber-CC"
               className={styles.input}
               type="text"
               autoFocus={true}
@@ -437,7 +437,10 @@ Your copy of Party Round Mag will be shipped shortly.
       default:
         return (
           <>
-            <label className={styles.hiddenLabel} htmlFor={this.state.config.id}>
+            <label
+              className={styles.hiddenLabel}
+              htmlFor={this.state.config.id}
+            >
               {this.state.config.id}
             </label>
             <input
