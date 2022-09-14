@@ -386,8 +386,8 @@ Your copy of Party Round Mag will be shipped shortly.
       case "cc":
         return (
           <input
-            title="cc"
-            id="cc"
+            name="cardNumber"
+            id="cardNumber-CC"
             className={styles.input}
             type="tel"
             autoFocus={true}
