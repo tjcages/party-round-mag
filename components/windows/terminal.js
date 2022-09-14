@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import styles from "../../styles/terminal.module.scss";
 
 const ENTER_KEY = 13;
@@ -80,7 +80,7 @@ const inputConfig = {
     placeholder: "335 Madison Ave New York, NY 10017",
   },
   cc: {
-    id: "cardNumber-CC",
+    id: "cc",
     type: "cc-number",
     autoComplete: "cc-number",
     inputMode: "text",
@@ -89,7 +89,7 @@ const inputConfig = {
     placeholder: "XXXX XXXX XXXX XXXX",
   },
   exp: {
-    id: "cardExp",
+    id: "exp",
     type: "cc-exp",
     autoComplete: "cc-exp",
     inputMode: "text",
@@ -160,7 +160,11 @@ export default class Terminal extends Component {
   init() {
     this.history = [];
     this.elements = {
-      input: createRef(),
+      inputs: [
+        document.querySelector("#input"),
+        document.querySelector("#cardNumber"),
+        document.querySelector("#address"),
+      ],
       terminal: document.querySelector("#content"),
       outputContainer: document.querySelector("#outputContainer"),
     };
@@ -172,6 +176,9 @@ export default class Terminal extends Component {
       buy: this.buyFile,
       cd: this.enterFolder,
     };
+    // this.elements.inputs.forEach((input) =>
+    //   input.addEventListener("keydown", this.onKeyDown)
+    // );
     this.catFile("readme.md");
   }
 
@@ -179,6 +186,16 @@ export default class Terminal extends Component {
     this.history = [];
     this.elements.outputContainer.innerHTML = "";
   }
+
+  // refocusInput() {
+  //   if (this.elements && this.elements.input) {
+  //     var that = this;
+  //     this.elements.input.blur();
+  //     setTimeout(() => {
+  //       that.elements.input.focus();
+  //     }, 1);
+  //   }
+  // }
 
   catFile(fileName) {
     if (fileName in fileSystem && fileName !== "mag")
@@ -288,11 +305,10 @@ Your copy of Party Round Mag will be shipped shortly.
   }
 
   clearInput() {
-    this.elements.input.current.value = "";
-    // console.log(this.elements.inputs);
-    // this.elements.inputs.forEach((input) => {
-    //   if (input) input.value = "";
-    // });
+    console.log(this.elements.inputs);
+    this.elements.inputs.forEach((input) => {
+      if (input) input.value = "";
+    });
   }
 
   onKeyDown(e) {
@@ -366,29 +382,7 @@ Your copy of Party Round Mag will be shipped shortly.
             <div id="outputContainer" className={styles.outputContainer}></div>
             <div className={styles.currentLine}>
               <span className={styles.prompt}>$</span>
-              <div className={styles.inputContainer}>
-                {this.selectInput()}
-                {/* <label
-                  className={styles.hiddenLabel}
-                  htmlFor={this.state.config.id}
-                >
-                  {this.state.config.id}
-                </label>
-                <input
-                  ref={this.elements && this.elements.input}
-                  title={this.state.config.id}
-                  id={this.state.config.id}
-                  className={styles.input}
-                  autoFocus={true}
-                  type={this.state.config.type}
-                  inputMode={this.state.config.inputMode}
-                  pattern={this.state.config.pattern}
-                  autoComplete={this.state.config.autoComplete}
-                  maxLength={this.state.config.maxLength}
-                  placeholder={this.state.config.placeholder}
-                  onKeyDown={(e) => this.onKeyDown(e)}
-                /> */}
-              </div>
+              <div className={styles.inputContainer}>{this.selectInput()}</div>
             </div>
           </div>
         </div>
@@ -401,24 +395,20 @@ Your copy of Party Round Mag will be shipped shortly.
       case "cc":
         return (
           <>
-            <label
-              className={styles.hiddenLabel}
-              htmlFor={this.state.config.id}
-            >
+            <label className={styles.hiddenLabel} htmlFor="cardNumber">
               Card Number
             </label>
             <input
-              ref={this.elements && this.elements.input}
-              name={this.state.config.id}
-              id={this.state.config.id}
+              name="cardNumber"
+              id="cardNumber"
               className={styles.input}
+              type="regexp"
               autoFocus={true}
-              type={this.state.config.type}
-              inputMode={this.state.config.inputMode}
-              pattern={this.state.config.pattern}
-              autoComplete={this.state.config.autoComplete}
-              maxLength={this.state.config.maxLength}
-              placeholder={this.state.config.placeholder}
+              autoComplete="cc-number"
+              inputMode="text"
+              pattern="[0-9s]{13,19}"
+              maxLength="19"
+              placeholder="XXXX XXXX XXXX XXXX"
               onKeyDown={(e) => this.onKeyDown(e)}
             />
           </>
@@ -426,52 +416,39 @@ Your copy of Party Round Mag will be shipped shortly.
       case "address":
         return (
           <>
-            <label
-              className={styles.hiddenLabel}
-              htmlFor={this.state.config.id}
-            >
+            <label className={styles.hiddenLabel} htmlFor="address">
               Shipping Address
             </label>
             <input
-              ref={this.elements && this.elements.input}
-              name={this.state.config.id}
-              id={this.state.config.id}
+              title="address"
+              id="address"
               className={styles.input}
+              type="regexp"
               autoFocus={true}
-              type={this.state.config.type}
-              inputMode={this.state.config.inputMode}
-              pattern={this.state.config.pattern}
-              autoComplete={this.state.config.autoComplete}
-              maxLength={this.state.config.maxLength}
-              placeholder={this.state.config.placeholder}
+              autoComplete="billing street-address"
+              inputMode="text"
+              pattern="regexp"
+              maxLength="100"
+              placeholder="335 Madison Ave New York, NY 10017"
               onKeyDown={(e) => this.onKeyDown(e)}
             />
           </>
         );
       default:
         return (
-          <>
-            <label
-              className={styles.hiddenLabel}
-              htmlFor={this.state.config.id}
-            >
-              {this.state.config.id}
-            </label>
-            <input
-              ref={this.elements && this.elements.input}
-              name={this.state.config.id}
-              id={this.state.config.id}
-              className={styles.input}
-              autoFocus={true}
-              type={this.state.config.type}
-              inputMode={this.state.config.inputMode}
-              pattern={this.state.config.pattern}
-              autoComplete={this.state.config.autoComplete}
-              maxLength={this.state.config.maxLength}
-              placeholder={this.state.config.placeholder}
-              onKeyDown={(e) => this.onKeyDown(e)}
-            />
-          </>
+          <input
+            title={this.state.config.id}
+            id={this.state.config.id}
+            className={styles.input}
+            autoFocus={true}
+            type={this.state.config.type}
+            inputMode={this.state.config.inputMode}
+            pattern={this.state.config.pattern}
+            autoComplete={this.state.config.autoComplete}
+            maxLength={this.state.config.maxLength}
+            placeholder={this.state.config.placeholder}
+            onKeyDown={(e) => this.onKeyDown(e)}
+          />
         );
     }
   }
