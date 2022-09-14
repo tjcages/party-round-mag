@@ -115,7 +115,7 @@ export default class Terminal extends Component {
     this.init = this.init.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.clearHistory = this.clearHistory.bind(this);
-    this.refocusInput = this.refocusInput.bind(this);
+    // this.refocusInput = this.refocusInput.bind(this);
     this.addHistory = this.addHistory.bind(this);
     this.listFiles = this.listFiles.bind(this);
     this.catFile = this.catFile.bind(this);
@@ -160,7 +160,11 @@ export default class Terminal extends Component {
   init() {
     this.history = [];
     this.elements = {
-      input: document.querySelector("#input"),
+      inputs: [
+        ...document.querySelectorAll("[id^='input']"),
+        ...document.querySelectorAll("[id^='cardNumber']"),
+        ...document.querySelectorAll("[id^='address']"),
+      ],
       terminal: document.querySelector("#content"),
       outputContainer: document.querySelector("#outputContainer"),
     };
@@ -172,7 +176,9 @@ export default class Terminal extends Component {
       buy: this.buyFile,
       cd: this.enterFolder,
     };
-    this.elements.input.addEventListener("keydown", this.onKeyDown);
+    // this.elements.inputs.forEach((input) =>
+    //   input.addEventListener("keydown", this.onKeyDown)
+    // );
     this.catFile("readme.md");
   }
 
@@ -181,15 +187,15 @@ export default class Terminal extends Component {
     this.elements.outputContainer.innerHTML = "";
   }
 
-  refocusInput() {
-    if (this.elements && this.elements.input) {
-      var that = this;
-      this.elements.input.blur();
-      setTimeout(() => {
-        that.elements.input.focus();
-      }, 1);
-    }
-  }
+  // refocusInput() {
+  //   if (this.elements && this.elements.input) {
+  //     var that = this;
+  //     this.elements.input.blur();
+  //     setTimeout(() => {
+  //       that.elements.input.focus();
+  //     }, 1);
+  //   }
+  // }
 
   catFile(fileName) {
     if (fileName in fileSystem && fileName !== "mag")
@@ -299,7 +305,8 @@ Your copy of Party Round Mag will be shipped shortly.
   }
 
   clearInput() {
-    this.elements.input.value = "";
+    console.log(this.elements.inputs);
+    this.elements.inputs.forEach((input) => (input.value = ""));
   }
 
   onKeyDown(e) {
@@ -307,7 +314,7 @@ Your copy of Party Round Mag will be shipped shortly.
     if (e.keyCode !== ENTER_KEY) return;
     if (!this.state.allowEditing) return;
 
-    const inputText = this.elements.input.value.toLowerCase();
+    const inputText = e.target.value.toLowerCase();
     const inputArray = inputText.split(" ");
     const inputCommand = inputArray[0];
     const arg = inputArray[1];
@@ -385,10 +392,13 @@ Your copy of Party Round Mag will be shipped shortly.
     switch (this.state.config.id) {
       case "cc":
         return (
-          <form>
+          <>
+            <label style={{ visibility: "hidden" }} htmlFor="cardNumber">
+              Card Number
+            </label>
             <input
               name="cardNumber"
-              id="cardNumber-CC"
+              id="cardNumber"
               className={styles.input}
               type="regexp"
               autoFocus={true}
@@ -397,8 +407,9 @@ Your copy of Party Round Mag will be shipped shortly.
               pattern="[0-9s]{13,19}"
               maxLength="19"
               placeholder="XXXX XXXX XXXX XXXX"
+              onKeyDown={(e) => this.onKeyDown(e)}
             />
-          </form>
+          </>
         );
       case "address":
         return (
@@ -413,6 +424,7 @@ Your copy of Party Round Mag will be shipped shortly.
             pattern="regexp"
             maxLength="100"
             placeholder="335 Madison Ave New York, NY 10017"
+            onKeyDown={(e) => this.onKeyDown(e)}
           />
         );
       default:
@@ -428,6 +440,7 @@ Your copy of Party Round Mag will be shipped shortly.
             autoComplete={this.state.config.autoComplete}
             maxLength={this.state.config.maxLength}
             placeholder={this.state.config.placeholder}
+            onKeyDown={(e) => this.onKeyDown(e)}
           />
         );
     }
