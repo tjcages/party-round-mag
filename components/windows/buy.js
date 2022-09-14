@@ -63,7 +63,7 @@ const Buy = (props) => {
               <h3>NEW!</h3>
               <div className={styles.sticker}>
                 <Image
-                  src={"/img/sticker.png"}
+                  src={soldout ? "/img/sticker2.png" : "/img/sticker.png"}
                   alt="new !! icon"
                   layout="fill"
                 />

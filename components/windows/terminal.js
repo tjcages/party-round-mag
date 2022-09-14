@@ -42,6 +42,65 @@ const success = `*
 
 `;
 
+const inputConfig = {
+  default: {
+    type: "text",
+    autoComplete: "off",
+    inputMode: "text",
+    pattern: "regexp",
+    maxLength: "100",
+    placeholder: "",
+  },
+  name: {
+    type: "text",
+    autoComplete: "cc-name",
+    inputMode: "text",
+    pattern: "regexp",
+    maxLength: "100",
+    placeholder: "josh appleseed",
+  },
+  email: {
+    type: "email",
+    autoComplete: "email",
+    inputMode: "email",
+    pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$",
+    maxLength: "100",
+    placeholder: "josh@partyround.com",
+  },
+  address: {
+    type: "text",
+    autoComplete: "street-address",
+    inputMode: "text",
+    pattern: "regexp",
+    maxLength: "100",
+    placeholder: "335 Madison Ave New York, NY 10017",
+  },
+  cc: {
+    type: "tel",
+    autoComplete: "cc-number",
+    inputMode: "numeric",
+    pattern: "[0-9\s]{13,19}",
+    maxLength: "19",
+    placeholder: "XXXX XXXX XXXX XXXX",
+  },
+  exp: {
+    type: "numeric",
+    autoComplete: "cc-exp",
+    inputMode: "numeric",
+    pattern: "(0[1-9]|1[0-2])/[0-9]{2}",
+    maxLength: "5",
+    placeholder: "XX/XX",
+  },
+  csv: {
+    type: "numeric",
+    autoComplete: "cc-csc",
+    inputMode: "numeric",
+    pattern: "regexp",
+    maxLength: "4",
+    placeholder: "XXX",
+  },
+};
+
 export default class Terminal extends Component {
   constructor(props) {
     super(props);
@@ -67,6 +126,7 @@ export default class Terminal extends Component {
       ccNumber: null,
       expDate: null,
       csv: null,
+      config: inputConfig["default"],
     };
   }
 
@@ -122,14 +182,12 @@ export default class Terminal extends Component {
     if (fileName in fileSystem) {
       this.addHistory(fileSystem[fileName]);
       this.addHistory(`Please enter your #full name:#`);
-      this.setState({ buying: true });
+      this.setState({ buying: true, config: inputConfig["name"] });
     } else
       this.addHistory(`buy: ${fileName}: No such product or drop for sale`);
   }
 
-  enterFolder(fileName) {
-
-  }
+  enterFolder(fileName) {}
 
   purchaseRequest() {
     this.setState({ allowEditing: false });
@@ -247,22 +305,22 @@ Your copy of Party Round Mag will be shipped shortly.
     if (this.state.buying) {
       // determine which field is next
       if (this.state.name == null) {
-        this.setState({ name: inputText });
+        this.setState({ name: inputText, config: inputConfig["email"] });
         this.addHistory(`Please enter your #email:#`);
       } else if (this.state.email == null) {
-        this.setState({ email: inputText });
+        this.setState({ email: inputText, config: inputConfig["address"] });
         this.addHistory(`Please enter your full #shipping address:#`);
       } else if (this.state.address == null) {
-        this.setState({ address: inputText });
+        this.setState({ address: inputText, config: inputConfig["cc"] });
         this.addHistory(`Please enter your #credit card number:#`);
       } else if (this.state.ccNumber == null) {
-        this.setState({ ccNumber: inputText });
+        this.setState({ ccNumber: inputText, config: inputConfig["exp"] });
         this.addHistory(`Please enter your #expiration date as MM/YY:#`);
       } else if (this.state.expDate == null) {
-        this.setState({ expDate: inputText });
+        this.setState({ expDate: inputText, config: inputConfig["csv"] });
         this.addHistory(`Please enter your #security code:#`);
       } else if (this.state.csv == null) {
-        this.setState({ csv: inputText });
+        this.setState({ csv: inputText, config: inputConfig["default"] });
         this.addHistory(confirm);
         this.addHistory(
           `Ship 1 Party Round Mag to #${this.state.address} for $0.99#
@@ -274,7 +332,6 @@ Your copy of Party Round Mag will be shipped shortly.
         this.addHistory(`Buying...`);
         this.purchaseRequest();
         this.resetInput();
-        
       } else this.addHistory(`sh: command not found: ${inputCommand}`);
       return;
     }
@@ -300,9 +357,14 @@ Your copy of Party Round Mag will be shipped shortly.
                 <input
                   id="input"
                   className={styles.input}
-                  type="text"
+                  // type="text"
                   autoFocus={true}
-                  autoComplete="off"
+                  type={this.state.config.type}
+                  inputMode={this.state.config.inputMode}
+                  pattern={this.state.config.pattern}
+                  autoComplete={this.state.config.autoComplete}
+                  maxLength={this.state.config.maxLength}
+                  placeholder={this.state.config.placeholder}
                 />
               </div>
             </div>

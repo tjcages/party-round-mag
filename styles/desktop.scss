@@ -353,6 +353,23 @@ svg {
 
   &:disabled {
     cursor: not-allowed;
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-bottom: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+
+    svg {
+      position: relative;
+      top: 1px;
+      left: 1px;
+    }
+
+    .bevel {
+      border-top: 1px solid #7f7f7f;
+      border-left: 1px solid #7f7f7f;
+      border-bottom: 1px solid #bfbfbf;
+      border-right: 1px solid #bfbfbf;
+    }
   }
 }
 
