@@ -385,18 +385,20 @@ Your copy of Party Round Mag will be shipped shortly.
     switch (this.state.config.id) {
       case "cc":
         return (
-          <input
-            name="cardNumber"
-            id="cardNumber-CC"
-            className={styles.input}
-            type="tel"
-            autoFocus={true}
-            autoComplete="cc-number"
-            inputMode="text"
-            pattern="[0-9s]{13,19}"
-            maxLength="19"
-            placeholder="XXXX XXXX XXXX XXXX"
-          />
+          <form>
+            <input
+              name="cardNumber"
+              id="cardNumber-CC"
+              className={styles.input}
+              type="regexp"
+              autoFocus={true}
+              autoComplete="cc-number"
+              inputMode="text"
+              pattern="[0-9s]{13,19}"
+              maxLength="19"
+              placeholder="XXXX XXXX XXXX XXXX"
+            />
+          </form>
         );
       case "address":
         return (
@@ -404,7 +406,7 @@ Your copy of Party Round Mag will be shipped shortly.
             title="address"
             id="address"
             className={styles.input}
-            type="text"
+            type="regexp"
             autoFocus={true}
             autoComplete="billing street-address"
             inputMode="text"
