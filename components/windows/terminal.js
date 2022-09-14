@@ -395,14 +395,14 @@ Your copy of Party Round Mag will be shipped shortly.
       case "cc":
         return (
           <>
-            <label className={styles.hiddenLabel} htmlFor="cardNumber-CC">
+            <label style={{ position: "absolute", visibility: "hidden" }} htmlFor="cardNumber">
               Card Number
             </label>
             <input
               name="cardNumber"
-              id="cardNumber-CC"
+              id="cardNumber"
               className={styles.input}
-              type="text"
+              type="regexp"
               autoFocus={true}
               autoComplete="cc-number"
               inputMode="text"
@@ -415,48 +415,35 @@ Your copy of Party Round Mag will be shipped shortly.
         );
       case "address":
         return (
-          <>
-            <label className={styles.hiddenLabel} htmlFor="address">
-              Shipping Address
-            </label>
-            <input
-              title="address"
-              id="address"
-              className={styles.input}
-              type="regexp"
-              autoFocus={true}
-              autoComplete="billing street-address"
-              inputMode="text"
-              pattern="regexp"
-              maxLength="100"
-              placeholder="335 Madison Ave New York, NY 10017"
-              onKeyDown={(e) => this.onKeyDown(e)}
-            />
-          </>
+          <input
+            title="address"
+            id="address"
+            className={styles.input}
+            type="regexp"
+            autoFocus={true}
+            autoComplete="billing street-address"
+            inputMode="text"
+            pattern="regexp"
+            maxLength="100"
+            placeholder="335 Madison Ave New York, NY 10017"
+            onKeyDown={(e) => this.onKeyDown(e)}
+          />
         );
       default:
         return (
-          <>
-            <label
-              className={styles.hiddenLabel}
-              htmlFor={this.state.config.id}
-            >
-              {this.state.config.id}
-            </label>
-            <input
-              title={this.state.config.id}
-              id={this.state.config.id}
-              className={styles.input}
-              autoFocus={true}
-              type={this.state.config.type}
-              inputMode={this.state.config.inputMode}
-              pattern={this.state.config.pattern}
-              autoComplete={this.state.config.autoComplete}
-              maxLength={this.state.config.maxLength}
-              placeholder={this.state.config.placeholder}
-              onKeyDown={(e) => this.onKeyDown(e)}
-            />
-          </>
+          <input
+            title={this.state.config.id}
+            id={this.state.config.id}
+            className={styles.input}
+            autoFocus={true}
+            type={this.state.config.type}
+            inputMode={this.state.config.inputMode}
+            pattern={this.state.config.pattern}
+            autoComplete={this.state.config.autoComplete}
+            maxLength={this.state.config.maxLength}
+            placeholder={this.state.config.placeholder}
+            onKeyDown={(e) => this.onKeyDown(e)}
+          />
         );
     }
   }
