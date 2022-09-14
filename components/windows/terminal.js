@@ -402,7 +402,7 @@ Your copy of Party Round Mag will be shipped shortly.
               name="cardNumber"
               id="cardNumber"
               className={styles.input}
-              type="regexp"
+              type="text"
               autoFocus={true}
               autoComplete="cc-number"
               inputMode="text"
@@ -436,19 +436,24 @@ Your copy of Party Round Mag will be shipped shortly.
         );
       default:
         return (
-          <input
-            title={this.state.config.id}
-            id={this.state.config.id}
-            className={styles.input}
-            autoFocus={true}
-            type={this.state.config.type}
-            inputMode={this.state.config.inputMode}
-            pattern={this.state.config.pattern}
-            autoComplete={this.state.config.autoComplete}
-            maxLength={this.state.config.maxLength}
-            placeholder={this.state.config.placeholder}
-            onKeyDown={(e) => this.onKeyDown(e)}
-          />
+          <>
+            <label className={styles.hiddenLabel} htmlFor={this.state.config.id}>
+              {this.state.config.id}
+            </label>
+            <input
+              title={this.state.config.id}
+              id={this.state.config.id}
+              className={styles.input}
+              autoFocus={true}
+              type={this.state.config.type}
+              inputMode={this.state.config.inputMode}
+              pattern={this.state.config.pattern}
+              autoComplete={this.state.config.autoComplete}
+              maxLength={this.state.config.maxLength}
+              placeholder={this.state.config.placeholder}
+              onKeyDown={(e) => this.onKeyDown(e)}
+            />
+          </>
         );
     }
   }
