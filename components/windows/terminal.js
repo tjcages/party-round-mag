@@ -383,10 +383,24 @@ Your copy of Party Round Mag will be shipped shortly.
 
   selectInput() {
     switch (this.state.config.id) {
+      case "cc":
+        return (
+          <input
+            title="address"
+            id="address"
+            className={styles.input}
+            type="text"
+            autoComplete="billing street-address"
+            inputMode="text"
+            pattern="regexp"
+            maxLength="100"
+            placeholder="335 Madison Ave New York, NY 10017"
+          />
+        );
       case "address":
         return (
           <input
-            title={this.state.config.id}
+            title="address"
             id="address"
             className={styles.input}
             type="text"
