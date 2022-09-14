@@ -25,7 +25,6 @@
   }
 }
 
-
 .terminal {
   flex: 0 0 92%;
   font-size: 12px;
@@ -44,7 +43,7 @@
   color: #00fe00;
   font-family: monospace;
   line-height: 1.2;
-  margin-right: 5px
+  margin-right: 5px;
 }
 
 .inputContainer {
@@ -81,7 +80,7 @@
 }
 
 .highlight {
-  color: #DF34C9;
+  color: #df34c9;
 }
 
 @media only screen and (max-width: 600px) {

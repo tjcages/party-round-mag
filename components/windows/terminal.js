@@ -123,6 +123,7 @@ export default class Terminal extends Component {
     this.enterFolder = this.enterFolder.bind(this);
     this.resetInput = this.resetInput.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
+    this.selectInput = this.selectInput.bind(this);
 
     this.state = {
       inited: false,
@@ -372,24 +373,45 @@ Your copy of Party Round Mag will be shipped shortly.
             <div id="outputContainer" className={styles.outputContainer}></div>
             <div className={styles.currentLine}>
               <span className={styles.prompt}>$</span>
-              <div className={styles.inputContainer}>
-                <input
-                  title={this.state.config.id}
-                  id={this.state.config.id}
-                  className={styles.input}
-                  autoFocus={true}
-                  type={this.state.config.type}
-                  inputMode={this.state.config.inputMode}
-                  pattern={this.state.config.pattern}
-                  autoComplete={this.state.config.autoComplete}
-                  maxLength={this.state.config.maxLength}
-                  placeholder={this.state.config.placeholder}
-                />
-              </div>
+              <div className={styles.inputContainer}>{this.selectInput()}</div>
             </div>
           </div>
         </div>
       </div>
     ) : null;
+  }
+
+  selectInput() {
+    switch (this.state.config.id) {
+      case "address":
+        return (
+          <input
+            title={this.state.config.id}
+            id="address"
+            className={styles.input}
+            type="text"
+            autoComplete="billing street-address"
+            inputMode="text"
+            pattern="regexp"
+            maxLength="100"
+            placeholder="335 Madison Ave New York, NY 10017"
+          />
+        );
+      default:
+        return (
+          <input
+            title={this.state.config.id}
+            id={this.state.config.id}
+            className={styles.input}
+            autoFocus={true}
+            type={this.state.config.type}
+            inputMode={this.state.config.inputMode}
+            pattern={this.state.config.pattern}
+            autoComplete={this.state.config.autoComplete}
+            maxLength={this.state.config.maxLength}
+            placeholder={this.state.config.placeholder}
+          />
+        );
+    }
   }
 }
