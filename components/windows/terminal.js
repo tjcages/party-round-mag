@@ -390,6 +390,7 @@ Your copy of Party Round Mag will be shipped shortly.
             id="cc"
             className={styles.input}
             type="tel"
+            autoFocus={true}
             autoComplete="cc-number"
             inputMode="text"
             pattern="[0-9s]{13,19}"
@@ -404,6 +405,7 @@ Your copy of Party Round Mag will be shipped shortly.
             id="address"
             className={styles.input}
             type="text"
+            autoFocus={true}
             autoComplete="billing street-address"
             inputMode="text"
             pattern="regexp"
