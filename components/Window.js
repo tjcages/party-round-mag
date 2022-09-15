@@ -38,7 +38,7 @@ const Window = (props) => {
   useEffect(() => {
     const isMobile = isTablet();
     setMobile(isMobile);
-  }, [])
+  }, []);
 
   function dragMove(event, xMove, yMove, xSize, ySize) {
     let mouseX, mouseY;

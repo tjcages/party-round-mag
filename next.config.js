@@ -25,7 +25,7 @@ const nextConfig = {
       },
       {
         source: "/pages/touch-grass",
-        destination: "/",
+        destination: "https://touch-grass-kits.webflow.io/",
         permanent: false,
       },
       {
