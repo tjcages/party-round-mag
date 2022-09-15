@@ -1,6 +1,8 @@
 import React, { Component, createRef } from "react";
 import styles from "../../styles/terminal.module.scss";
 import { isTablet } from "../../utils/agents";
+import { createUser } from "../../firebase";
+// import { createStripeCustomer } from "../../pages/api/hello";
 
 const ENTER_KEY = 13;
 const fileSystem = {
@@ -91,10 +93,10 @@ const inputConfig = {
   },
   exp: {
     id: "exp",
-    type: "number",
+    type: "text",
     autoComplete: "cc-exp",
     inputMode: "text",
-    pattern: "(0[1-9]|1[0-2])/[0-9]{2}",
+    pattern: "regexp",
     maxLength: "5",
     placeholder: "XX/XX",
   },
@@ -104,7 +106,7 @@ const inputConfig = {
     autoComplete: "cc-csc",
     inputMode: "text",
     pattern: "regexp",
-    maxLength: "4",
+    maxLength: "5",
     placeholder: "XXX",
   },
 };
@@ -130,6 +132,7 @@ export default class Terminal extends Component {
       inited: false,
       allowEditing: true,
       buying: false,
+      id: null,
       name: null,
       email: null,
       shipping: null,
@@ -149,6 +152,7 @@ export default class Terminal extends Component {
         inited: false,
         allowEditing: true,
         buying: false,
+        id: null,
         name: null,
         shipping: null,
         ccNumber: null,
@@ -202,6 +206,11 @@ export default class Terminal extends Component {
   purchaseRequest() {
     this.setState({ allowEditing: false });
     var response = null;
+
+    // createStripeCustomer(this.state).then((res) => {
+    //   console.log("Got response: " + res);
+    // })
+
     setTimeout(function () {
       response = 1;
     }, 4000);
@@ -236,6 +245,7 @@ Your copy of Party Round Mag will be shipped shortly.
     this.setState({
       allowEditing: true,
       buying: false,
+      id: null,
       name: null,
       email: null,
       shipping: null,
@@ -339,8 +349,17 @@ Your copy of Party Round Mag will be shipped shortly.
         this.setState({ name: inputText, config: inputConfig["email"] });
         this.addHistory(`Please enter your #email:#`);
       } else if (this.state.email == null) {
-        this.setState({ email: inputText, config: inputConfig["address"] });
-        this.addHistory(`Please enter your full #shipping address:#`);
+        this.addHistory("...");
+        // authenticate the user with email
+        createUser(inputText).then((user) => {
+          console.log("Got user!", user)
+          this.setState({
+            id: user.uid,
+            email: inputText,
+            config: inputConfig["address"],
+          });
+          this.addHistory(`Please enter your full #shipping address:#`);
+        });
       } else if (this.state.address == null) {
         this.setState({ address: inputText, config: inputConfig["cc"] });
         this.addHistory(`Please enter your #credit card number:#`);
@@ -376,15 +395,14 @@ Your copy of Party Round Mag will be shipped shortly.
   render() {
     return this.props.window.open ? (
       <div id="content" className={styles.content}>
-        <div
-          className={styles.bezel}
-          onClick={() => this.detectFocus()}
-        >
+        <div className={styles.bezel} onClick={() => this.detectFocus()}>
           <div id="terminal" className={styles.terminal}>
             <div id="outputContainer" className={styles.outputContainer}></div>
             <div className={styles.currentLine}>
               <span className={styles.prompt}>$</span>
-              <div className={styles.inputContainer}>{this.selectInput(this.state.config)}</div>
+              <div className={styles.inputContainer}>
+                {this.selectInput(this.state.config)}
+              </div>
             </div>
           </div>
         </div>
@@ -413,7 +431,6 @@ Your copy of Party Round Mag will be shipped shortly.
               maxLength="19"
               placeholder="XXXX XXXX XXXX XXXX"
               onKeyDown={(e) => this.onKeyDown(e)}
-              maximumScale={1}
             />
           </>
         );

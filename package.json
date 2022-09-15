@@ -12,13 +12,16 @@
     "@fontsource/dm-mono": "^4.5.9",
     "@react-three/drei": "^9.28.2",
     "@react-three/fiber": "^8.7.2",
+    "firebase": "^9.9.4",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.54.5",
+    "stripe": "^10.8.0",
     "three": "^0.144.0",
     "three-custom-shader-material": "^4.0.0",
     "three-stdlib": "^2.15.0",
+    "uuid": "^9.0.0",
     "zustand": "^4.1.1"
   },
   "devDependencies": {

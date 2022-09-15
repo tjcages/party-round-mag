@@ -11,6 +11,35 @@ const nextConfig = {
       "pbs.twimg.com",
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/pages/infinite-ads",
+        destination: "/",
+        permanent: false,
+      },
+      {
+        source: "/pages/gold-nft",
+        destination: "/",
+        permanent: false,
+      },
+      {
+        source: "/pages/touch-grass",
+        destination: "/",
+        permanent: false,
+      },
+      {
+        source: "/pages/spotify",
+        destination: "/",
+        permanent: false,
+      },
+      {
+        source: "/pages/bear-goggles",
+        destination: "https://www.beargoggles.xyz/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
