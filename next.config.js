@@ -15,7 +15,7 @@ const nextConfig = {
     return [
       {
         source: "/pages/infinite-ads",
-        destination: "/",
+        destination: "https://www.infinite-pr-ads.com/",
         permanent: false,
       },
       {
