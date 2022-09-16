@@ -20,7 +20,7 @@ const nextConfig = {
       },
       {
         source: "/pages/gold-nft",
-        destination: "https://gold-bar-nft.vercel.app/",
+        destination: "https://goldbarnft.vercel.app/",
         permanent: false,
       },
       {
