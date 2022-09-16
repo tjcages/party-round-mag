@@ -15,15 +15,15 @@ export default function Document() {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1"
         />
-        <meta name="description" content="Party Round Mag Vol.001" />
+        <meta name="description" content="A limited edition magazine, filled with alpha, editorial, & mini-drops." />
         <meta
           name="keywords"
-          content="Party, Round, Mag, Magazine, 2022, Volume, Vol, 001, Party Round Mag"
+          content="Party, Round, Mag, Magazine, 2022, Volume, Vol, 001, Party Round Mag, limited, edition, filled, alpha, editorial, mini, drops"
         />
         <meta name="theme-color" content="#c331d5" />
         <meta
           name="msapplication-TileImage"
-          content="/img/common/preview.jpg"
+          content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324ad6072ec8d42cb7c516c_preview.jpg"
         />
         <meta name="msapplication-TileColor" content="#c331d5" />
         <link rel="shortcut icon" href="/img/common/icon.ico" />
@@ -32,20 +32,20 @@ export default function Document() {
           sizes="180x180"
           href="/img/common/app_icon.png"
         />
-        <meta property="og:title" content="Party Round Mag" />
+        <meta property="og:title" content="Party Round Mag | A Drop By Party Round" />
         <meta property="og:site_name" content="Party Round Mag" />
         <meta property="og:type" content="website" />
         <meta
           property="og:description"
-          content="Party Round Mag | Vol.001 Get Yours Now"
+          content="A limited edition magazine, filled with alpha, editorial, & mini-drops."
         />
         <meta property="og:url" content="undefined/" />
         <meta property="og:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324ad6072ec8d42cb7c516c_preview.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Party Round Mag" />
+        <meta name="twitter:title" content="Party Round Mag | A Drop By Party Round" />
         <meta
           name="twitter:description"
-          content="Party Round Mag Vol.001 | Get Yours Now"
+          content="A limited edition magazine, filled with alpha, editorial, & mini-drops."
         />
         <meta name="twitter:creator" content="@PartyRound" />
         <meta name="twitter:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324ad6072ec8d42cb7c516c_preview.jpg" />
