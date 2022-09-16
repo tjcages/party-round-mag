@@ -39,16 +39,16 @@ export default function Document() {
           property="og:description"
           content="A limited edition magazine, filled with alpha, editorial, & mini-drops."
         />
-        <meta property="og:url" content="undefined/" />
-        <meta property="og:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324ad6072ec8d42cb7c516c_preview.jpg" />
+
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Party Round Mag | A Drop By Party Round" />
-        <meta
-          name="twitter:description"
-          content="A limited edition magazine, filled with alpha, editorial, & mini-drops."
-        />
+        <meta name="twitter:site" content="@PartyRound" />
         <meta name="twitter:creator" content="@PartyRound" />
         <meta name="twitter:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324ad6072ec8d42cb7c516c_preview.jpg" />
+        <meta property="og:url" content="https://partyroundmag.com/" />
+        <meta property="og:title" content="Party Round Mag | A Drop By Party Round" />
+        <meta property="og:description" content="A limited edition magazine, filled with alpha, editorial, & mini-drops." />
+        <meta property="og:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324ad6072ec8d42cb7c516c_preview.jpg" />
+
         <Script
           id="google-analytics"
           strategy="beforeInteractive"
