@@ -40,7 +40,7 @@ export default function Document() {
           content="Party Round Mag | Vol.001 Get Yours Now"
         />
         <meta property="og:url" content="undefined/" />
-        <meta property="og:image" content="/img/common/preview.jpg" />
+        <meta property="og:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324ad6072ec8d42cb7c516c_preview.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Party Round Mag" />
         <meta
@@ -48,7 +48,7 @@ export default function Document() {
           content="Party Round Mag Vol.001 | Get Yours Now"
         />
         <meta name="twitter:creator" content="@PartyRound" />
-        <meta name="twitter:image" content="/img/common/preview.jpg" />
+        <meta name="twitter:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324ad6072ec8d42cb7c516c_preview.jpg" />
         <Script
           id="google-analytics"
           strategy="beforeInteractive"
