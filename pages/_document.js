@@ -23,7 +23,7 @@ export default function Document() {
         <meta name="theme-color" content="#c331d5" />
         <meta
           name="msapplication-TileImage"
-          content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324ad6072ec8d42cb7c516c_preview.jpg"
+          content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324b10a9053f9f3641865cc_preview.png"
         />
         <meta name="msapplication-TileColor" content="#c331d5" />
         <link rel="shortcut icon" href="/img/common/icon.ico" />
@@ -43,11 +43,11 @@ export default function Document() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@PartyRound" />
         <meta name="twitter:creator" content="@PartyRound" />
-        <meta name="twitter:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324ad6072ec8d42cb7c516c_preview.jpg" />
+        <meta name="twitter:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324b10a9053f9f3641865cc_preview.png" />
         <meta property="og:url" content="https://partyroundmag.com/" />
         <meta property="og:title" content="Party Round Mag | A Drop By Party Round" />
         <meta property="og:description" content="A limited edition magazine, filled with alpha, editorial, & mini-drops." />
-        <meta property="og:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324ad6072ec8d42cb7c516c_preview.jpg" />
+        <meta property="og:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324b10a9053f9f3641865cc_preview.png" />
 
         <Script
           id="google-analytics"
