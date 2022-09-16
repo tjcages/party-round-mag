@@ -32,7 +32,7 @@ export default function Document() {
           sizes="180x180"
           href="/img/common/app_icon.png"
         />
-        <meta property="og:title" content="Party Round Mag | A Drop By Party Round" />
+        <meta property="og:title" content="Party Round Mag, a drop by Party Round" />
         <meta property="og:site_name" content="Party Round Mag" />
         <meta property="og:type" content="website" />
         <meta
@@ -45,7 +45,7 @@ export default function Document() {
         <meta name="twitter:creator" content="@PartyRound" />
         <meta name="twitter:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324b10a9053f9f3641865cc_preview.png" />
         <meta property="og:url" content="https://partyroundmag.com/" />
-        <meta property="og:title" content="Party Round Mag | A Drop By Party Round" />
+        <meta property="og:title" content="Party Round Mag, a drop by Party Round" />
         <meta property="og:description" content="A limited edition magazine, filled with alpha, editorial, & mini-drops." />
         <meta property="og:image" content="https://uploads-ssl.webflow.com/63239dddf0aabc3869e7c9c8/6324b10a9053f9f3641865cc_preview.png" />
 
