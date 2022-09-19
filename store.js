@@ -15,7 +15,7 @@ const store = (set, get) => ({
     }
   },
   soldout: false,
-  available: true,
+  available: false,
   windows: [
     {
       id: 0,
