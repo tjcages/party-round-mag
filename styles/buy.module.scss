@@ -149,6 +149,12 @@
     opacity: 1;
   }
 
+  &.available {
+    opacity: 1;
+    width: 160px;
+    left: 20px;
+  }
+
   @media only screen and (max-width: 600px) {
     & {
       top: 76px;
@@ -200,7 +206,7 @@
 }
 
 // Animation settings
-$totalTime: 3s;
+$totalTime: 5s;
 $items: 4;
 $animationSpeed: 2;
 

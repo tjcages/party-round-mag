@@ -6,6 +6,7 @@ import Button from "../Button";
 
 const Buy = (props) => {
   const openWindow = useStore((state) => state.openWindow);
+  const available = useStore((state) => state.available);
   const soldout = useStore((state) => state.soldout);
 
   function handleBuyClicked(e) {
@@ -49,9 +50,13 @@ const Buy = (props) => {
                 layout="fill"
               />
             </div>
-            <div className={`${styles.exclusive} ${soldout && styles.soldout}`}>
+            <div
+              className={`${styles.exclusive} ${soldout && styles.soldout} ${
+                !available && styles.available
+              }`}
+            >
               <Image
-                src={"/img/soldout.png"}
+                src={!available ? "/img/tomorrow.png" : "/img/soldout.png"}
                 alt="exclusive icon"
                 layout="fill"
               />
@@ -63,7 +68,13 @@ const Buy = (props) => {
               <h3>NEW!</h3>
               <div className={styles.sticker}>
                 <Image
-                  src={soldout ? "/img/sticker2.png" : "/img/sticker.png"}
+                  src={
+                    available
+                      ? soldout
+                        ? "/img/sticker2.png"
+                        : "/img/sticker.png"
+                      : "/img/sticker3.png"
+                  }
                   alt="new !! icon"
                   layout="fill"
                 />
@@ -78,7 +89,12 @@ const Buy = (props) => {
             <h2>$0.99</h2>
             <br />
           </div>
-          <Button text={soldout ? "SOLD OUT" : "BUY NOW"} large onClick={(e) => handleBuyClicked(e)} disabled={soldout} />
+          <Button
+            text={available ? soldout ? "SOLD OUT" : "BUY NOW" : "AVAILABLE"+"\n"+"9/20 at 9:30a PT"}
+            large
+            onClick={(e) => handleBuyClicked(e)}
+            disabled={soldout || !available}
+          />
         </div>
       </div>
     </div>

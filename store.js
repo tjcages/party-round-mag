@@ -7,6 +7,7 @@ const store = (set, get) => ({
     set((state) => ({ loaded: true }));
   },
   soldout: false,
+  available: false,
   windows: [
     {
       id: 0,

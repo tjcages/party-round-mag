@@ -11,24 +11,24 @@ const Vol = (props) => {
             <div className={styles.quad}>
               <div className={styles.item}>
                 <span>Infinite Ads</span>
-                <span className={styles.highlight}>[access locked]</span>
+                <span className={styles.highlight}>[Buy to unlock]</span>
               </div>
               <div />
               <div className={styles.item}>
                 <span>Gold Bar NFT</span>
-                <span className={styles.highlight}>[access locked]</span>
+                <span className={styles.highlight}>[Buy to unlock]</span>
               </div>
               <div />
               <div />
               <div />
               <div className={styles.item}>
                 <span>Touch Grass Kits</span>
-                <span className={styles.highlight}>[access locked]</span>
+                <span className={styles.highlight}>[Buy to unlock]</span>
               </div>
               <div />
               <div className={styles.item}>
                 <span>Bear Goggles</span>
-                <span className={styles.highlight}>[access locked]</span>
+                <span className={styles.highlight}>[Buy to unlock]</span>
               </div>
             </div>
 
