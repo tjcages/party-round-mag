@@ -1,9 +1,17 @@
-import React, { setState } from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 
 import Desktop from "../components/Desktop";
+import { listenToOrders } from "./api";
+import useStore from "../store";
 
 const Home = () => {
+  const setOrders = useStore((state) => state.setOrders);
+
+  useEffect(() => {
+    listenToOrders(setOrders);
+  }, [setOrders]);
+
   return (
     <div className="container">
       <Head>

@@ -1,8 +1,11 @@
 import React, { Component, createRef } from "react";
 import styles from "../../styles/terminal.module.scss";
 import { isTablet } from "../../utils/agents";
-import { createUser } from "../../firebase";
-// import { createStripeCustomer } from "../../pages/api/hello";
+import {
+  createUser,
+  createStripeCustomer,
+  createFirestoreOrder,
+} from "../../pages/api";
 
 const ENTER_KEY = 13;
 const fileSystem = {
@@ -102,7 +105,7 @@ const inputConfig = {
   },
   csc: {
     id: "csv",
-    type: "number",
+    type: "cc-csv",
     autoComplete: "cc-csc",
     inputMode: "text",
     pattern: "regexp",
@@ -135,7 +138,7 @@ export default class Terminal extends Component {
       id: null,
       name: null,
       email: null,
-      shipping: null,
+      address: null,
       ccNumber: null,
       expDate: null,
       csv: null,
@@ -154,10 +157,11 @@ export default class Terminal extends Component {
         buying: false,
         id: null,
         name: null,
-        shipping: null,
+        address: null,
         ccNumber: null,
         expDate: null,
         csv: null,
+        config: inputConfig["default"],
       });
     }
   }
@@ -178,6 +182,7 @@ export default class Terminal extends Component {
       buy: this.buyFile,
       cd: this.enterFolder,
     };
+    this.setState({ buying: false, config: inputConfig["default"] });
     this.catFile("readme.md");
   }
 
@@ -194,9 +199,13 @@ export default class Terminal extends Component {
 
   buyFile(fileName) {
     if (fileName in fileSystem) {
-      this.addHistory(fileSystem[fileName]);
-      this.addHistory(`Please enter your #full name:#`);
-      this.setState({ buying: true, config: inputConfig["name"] });
+      if (this.props.soldout) {
+        this.addHistory(`buy: ${fileName}: SOLD OUT`);
+      } else {
+        this.addHistory(fileSystem[fileName]);
+        this.addHistory(`Please enter your #full name:#`);
+        this.setState({ buying: true, config: inputConfig["name"] });
+      }
     } else
       this.addHistory(`buy: ${fileName}: No such product or drop for sale`);
   }
@@ -204,26 +213,50 @@ export default class Terminal extends Component {
   enterFolder(fileName) {}
 
   purchaseRequest() {
+    if (this.props.soldout) {
+      this.addHistory(`PARTY ROUND MAG SOLD OUT`);
+      this.resetInput();
+      return;
+    }
+
     this.setState({ allowEditing: false });
     var response = null;
 
-    // createStripeCustomer(this.state).then((res) => {
-    //   console.log("Got response: " + res);
-    // })
+    createStripeCustomer(this.state).then((res) => {
+      // create a new order in Firestore
+      const order = {
+        id: this.state.id,
+        email: this.state.email,
+        name: this.state.name,
+        address: this.state.address,
+        customer: res.customer,
+        timestamp: new Date(),
+      };
+      createFirestoreOrder(order);
 
-    setTimeout(function () {
-      response = 1;
-    }, 4000);
+      response = res;
+    });
+
     var that = this;
     const interval = setInterval(function () {
       if (response == null) that.addHistory(`...`);
-      else {
+      else if (response.status == "success") {
         clearInterval(interval);
         that.addHistory(success);
         that.addHistory(`
 #CONGRATS!#
 Your copy of Party Round Mag will be shipped shortly.
         `);
+        that.resetInput();
+      } else {
+        clearInterval(interval);
+        that.addHistory(
+          "There was an error processing your order, please try again."
+        );
+        if (response.error) {
+          that.addHistory(response.error);
+        }
+        that.resetInput();
       }
       that.scrollToBottom();
 
@@ -248,10 +281,11 @@ Your copy of Party Round Mag will be shipped shortly.
       id: null,
       name: null,
       email: null,
-      shipping: null,
+      address: null,
       ccNumber: null,
       expDate: null,
       csv: null,
+      config: inputConfig["default"],
     });
   }
 
@@ -299,7 +333,7 @@ Your copy of Party Round Mag will be shipped shortly.
     }
 
     this.elements.outputContainer.appendChild(outputSpan);
-    // this.refocusInput();
+    this.scrollToBottom();
   }
 
   listFiles(dir) {
@@ -351,14 +385,18 @@ Your copy of Party Round Mag will be shipped shortly.
       } else if (this.state.email == null) {
         this.addHistory("...");
         // authenticate the user with email
-        createUser(inputText).then((user) => {
-          console.log("Got user!", user)
-          this.setState({
-            id: user.uid,
-            email: inputText,
-            config: inputConfig["address"],
-          });
-          this.addHistory(`Please enter your full #shipping address:#`);
+        createUser(inputText).then(({ user, state }) => {
+          if (state == "success") {
+            this.setState({
+              id: user.uid,
+              email: inputText,
+              config: inputConfig["address"],
+            });
+            this.addHistory(`Please enter your full #shipping address:#`);
+          } else {
+            this.addHistory(`Email invalid, please try again.`);
+            this.addHistory(`Please enter your #email:#`);
+          }
         });
       } else if (this.state.address == null) {
         this.setState({ address: inputText, config: inputConfig["cc"] });
@@ -381,7 +419,6 @@ Your copy of Party Round Mag will be shipped shortly.
       } else if (inputText == "enter") {
         this.addHistory(`Buying...`);
         this.purchaseRequest();
-        this.resetInput();
       } else this.addHistory(`sh: command not found: ${inputCommand}`);
       return;
     }

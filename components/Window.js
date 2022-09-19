@@ -19,6 +19,7 @@ import ImagePage from "./windows/image";
 import Page from "./windows/_default";
 
 const Window = (props) => {
+  const soldout = useStore((state) => state.soldout);
   const isActive = useStore((state) => state.windows[props.window.id].active);
   const isOpen = useStore((state) => state.windows[props.window.id].open);
   const isMinimized = useStore(
@@ -121,7 +122,7 @@ const Window = (props) => {
       case "buy":
         return <Buy />;
       case "terminal":
-        return <Terminal window={props.window} />;
+        return <Terminal window={props.window} soldout={soldout} />;
       case "logo":
         return <Logo />;
       case "tron":

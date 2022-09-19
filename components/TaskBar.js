@@ -121,6 +121,31 @@ const TaskBar = (props) => {
               </li>
               <li
                 onMouseEnter={() => setProgramMenuOpen(0)}
+                onClick={() => {
+                  openWindow(5);
+                  closeStartMenu();
+                }}
+              >
+                <DefaultIcon
+                  icon={{
+                    src: "https://win98icons.alexmeub.com/icons/png/console_prompt-0.png",
+                  }}
+                  mid
+                />
+                <div className={styles.text}>
+                  <span className={styles.underline}>T</span>erminal
+                </div>
+                <svg
+                  className={styles.arrow}
+                  width="4"
+                  height="6"
+                  version="2.0"
+                >
+                  <use href="#arrow-right" />
+                </svg>
+              </li>
+              <li
+                onMouseEnter={() => setProgramMenuOpen(0)}
                 onClick={() =>
                   window.open("https://twitter.com/PartyRound", "_blank")
                 }

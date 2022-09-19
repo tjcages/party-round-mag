@@ -1,6 +1,8 @@
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../../styles/buy.module.scss";
 import useStore from "../../store";
+import { isTablet } from "../../utils/agents";
 
 import Button from "../Button";
 
@@ -8,6 +10,12 @@ const Buy = (props) => {
   const openWindow = useStore((state) => state.openWindow);
   const available = useStore((state) => state.available);
   const soldout = useStore((state) => state.soldout);
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    const isMobile = isTablet();
+    setMobile(isMobile);
+  }, []);
 
   function handleBuyClicked(e) {
     e.stopPropagation();
@@ -95,7 +103,7 @@ const Buy = (props) => {
                 ? soldout
                   ? "SOLD OUT"
                   : "BUY NOW"
-                : "AVAILABLE" + "\n" + "9/20 at 9:30a PT"
+                : mobile ? "AVAILABLE 9/20 at 9:30a PT" : "AVAILABLE" + "\n" + "9/20 at 9:30a PT"
             }
             large
             onClick={(e) => handleBuyClicked(e)}

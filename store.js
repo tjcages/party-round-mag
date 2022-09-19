@@ -6,6 +6,14 @@ const store = (set, get) => ({
   setLoaded: () => {
     set((state) => ({ loaded: true }));
   },
+  orders: 0,
+  setOrders: (orders) => {
+    if (orders >= 75) {
+      set((state) => ({ soldout: true, orders }));
+    } else {
+      set((state) => ({ soldout: false, orders }));
+    }
+  },
   soldout: false,
   available: false,
   windows: [
@@ -205,7 +213,9 @@ const store = (set, get) => ({
     {
       id: 9,
       title: "Party Pong",
-      icon: { src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png" },
+      icon: {
+        src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png",
+      },
       color: "#000000",
       page: "pong",
       selected: false,
@@ -442,7 +452,9 @@ const store = (set, get) => ({
     {
       id: 19,
       title: "Go Tron",
-      icon: { src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png" },
+      icon: {
+        src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png",
+      },
       color: "#d53c3d",
       page: "tron",
       selected: false,
@@ -551,7 +563,9 @@ const store = (set, get) => ({
     {
       id: 23,
       title: "Cap Table Pokémon",
-      icon: { src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png" },
+      icon: {
+        src: "https://win98icons.alexmeub.com/icons/png/joystick_alt-0.png",
+      },
       color: "#000000",
       page: "image",
       selected: false,
@@ -575,7 +589,9 @@ const store = (set, get) => ({
     {
       id: 24,
       title: "Paint by @jsngr",
-      icon: { src: "https://win98icons.alexmeub.com/icons/png/paint_old-0.png" },
+      icon: {
+        src: "https://win98icons.alexmeub.com/icons/png/paint_old-0.png",
+      },
       color: "#000000",
       page: "iframe",
       selected: false,
