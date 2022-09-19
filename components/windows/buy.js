@@ -56,7 +56,7 @@ const Buy = (props) => {
               }`}
             >
               <Image
-                src={!available ? "/img/tomorrow.png" : "/img/soldout.png"}
+                src={!available ? "/img/soon.png" : "/img/soldout.png"}
                 alt="exclusive icon"
                 layout="fill"
               />
@@ -90,7 +90,13 @@ const Buy = (props) => {
             <br />
           </div>
           <Button
-            text={available ? soldout ? "SOLD OUT" : "BUY NOW" : "AVAILABLE"+"\n"+"9/20 at 9:30a PT"}
+            text={
+              available
+                ? soldout
+                  ? "SOLD OUT"
+                  : "BUY NOW"
+                : "AVAILABLE" + "\n" + "9/20 at 9:30a PT"
+            }
             large
             onClick={(e) => handleBuyClicked(e)}
             disabled={soldout || !available}
