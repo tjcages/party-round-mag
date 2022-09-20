@@ -506,7 +506,7 @@ Your copy of Party Round Mag will be shipped shortly.
         if (inputText == "golden") {
           this.addHistory(`Correct.`);
           this.addHistory(
-            `If only we were all that lucky... Well maybe you can be! Introducing the new Gold Bar NFT, it's real gold without the real part. Get yours at #goldbarnft.xyz#.`
+            `If only we were all that lucky... Well maybe you can be! Introducing the new Gold Bar NFT, it's real gold without the real part. Get yours at #goldbarnft.vercel.app#.`
           );
         } else {
           this.addHistory(`Incorrect answer, try again.`);
