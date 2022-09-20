@@ -26,14 +26,14 @@ Type #'buy mag'# below to purchase a Party Round Mag.
 ╚═════╝  ╚═════╝    ╚═╝       ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ *
 
 `,
-locked: {
-  "secret.txt": `Didn't get a mag? There's still a chance to unlock the #secret mini drop sites#. Answer then next questions to gain access.`,
-  "question1": `We are in a __ market.`,
-  "question2": `Most of your time spent on social media is seeing these: __.`,
-  "question3": `What type of parachute did Adam Neumann receive as his exit package from WeWork?`,
-  "question4": `Which company acquired LinkedIn for $26.2B in 2016?`,
-  "final-question": `Man we're not sure how you got here, but we're glad you did. You seem like you'd be a good fit for the Party Round team – check us out & apply at partyround.com/careers.`
-},
+  locked: {
+    "secret.txt": `Didn't get a mag? There's still a chance to unlock the #secret mini drop sites#. Answer then next questions to gain access.`,
+    question1: `We are in a __ market.`,
+    question2: `Most of your time spent on social media is seeing these: __.`,
+    question3: `What type of parachute did Adam Neumann receive as his exit package from WeWork?`,
+    question4: `Which company acquired LinkedIn for $26.2B in 2016?`,
+    "final-question": `Man we're not sure how you got here, but we're glad you did. You seem like you'd be a good fit for the Party Round team – check us out & apply at partyround.com/careers.`,
+  },
 };
 const confirm = `*
 ██████╗ ██████╗ ███╗   ██╗███████╗██╗██████╗ ███╗   ███╗
@@ -221,7 +221,6 @@ export default class Terminal extends Component {
         this.setState({ question4: true });
       } else if (fileName.includes("final")) {
         this.resetQuestions();
-        this.addHistory(fileSystem[fileName]);  
       }
     } else if (fileName in fileSystem && fileName !== "mag")
       this.addHistory(fileSystem[fileName]);
@@ -496,7 +495,7 @@ Your copy of Party Round Mag will be shipped shortly.
         if (inputText == "ads") {
           this.addHistory(`Correct.`);
           this.addHistory(
-            `Get paid to do what you do best: Scroll ads. Check out #infinite-pr-ads.webflow.io#.`
+            `Get paid to do what you do best: Scroll ads. Check out #infinite-pr-ads.com#.`
           );
         } else {
           this.addHistory(`Incorrect answer, try again.`);
@@ -507,7 +506,7 @@ Your copy of Party Round Mag will be shipped shortly.
         if (inputText == "golden") {
           this.addHistory(`Correct.`);
           this.addHistory(
-            `If only we were all that lucky... Well maybe you can be! Introducing the new Gold Bar NFT, it's real gold without the real part. Get yours at #goldbarnft.vercel.app#.`
+            `If only we were all that lucky... Well maybe you can be! Introducing the new Gold Bar NFT, it's real gold without the real part. Get yours at #goldbarnft.xyz#.`
           );
         } else {
           this.addHistory(`Incorrect answer, try again.`);

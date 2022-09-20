@@ -20,12 +20,12 @@ const nextConfig = {
       },
       {
         source: "/pages/gold-nft",
-        destination: "https://goldbarnft.vercel.app/",
+        destination: "https://goldbarnft.xyz",
         permanent: false,
       },
       {
         source: "/pages/touch-grass",
-        destination: "https://touchgrasskits.webflow.io/",
+        destination: "https://www.touchgrasskits.com/",
         permanent: false,
       },
       {
