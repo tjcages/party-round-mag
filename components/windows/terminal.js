@@ -17,8 +17,6 @@ Supported commands are:
 
 Type #'buy mag'# below to purchase a Party Round Mag.
 `,
-  "secret1.txt": `Shhhh!`,
-  "secret2.txt": `Zip it!`,
   mag: `* 
 ██████╗ ██╗   ██╗██╗   ██╗    ███╗   ███╗ █████╗  ██████╗ 
 ██╔══██╗██║   ██║╚██╗ ██╔╝    ████╗ ████║██╔══██╗██╔════╝ 
@@ -28,6 +26,14 @@ Type #'buy mag'# below to purchase a Party Round Mag.
 ╚═════╝  ╚═════╝    ╚═╝       ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ *
 
 `,
+locked: {
+  "secret.txt": `Didn't get a mag? There's still a chance to unlock the #secret mini drop sites#. Answer then next questions to gain access.`,
+  "question1": `We are in a __ market.`,
+  "question2": `Most of your time spent on social media is seeing these: __.`,
+  "question3": `What type of parachute did Adam Neumann receive as his exit package from WeWork?`,
+  "question4": `Which company acquired LinkedIn for $26.2B in 2016?`,
+  "final-question": `Man we're not sure how you got here, but we're glad you did. You seem like you'd be a good fit for the Party Round team – check us out & apply at partyround.com/careers.`
+},
 };
 const confirm = `*
 ██████╗ ██████╗ ███╗   ██╗███████╗██╗██████╗ ███╗   ███╗
@@ -130,6 +136,7 @@ export default class Terminal extends Component {
     this.scrollToBottom = this.scrollToBottom.bind(this);
     this.selectInput = this.selectInput.bind(this);
     this.detectFocus = this.detectFocus.bind(this);
+    this.resetQuestions = this.resetQuestions.bind(this);
 
     this.state = {
       inited: false,
@@ -143,6 +150,11 @@ export default class Terminal extends Component {
       expDate: null,
       csv: null,
       config: inputConfig["default"],
+      path: null,
+      question1: false,
+      question2: false,
+      question3: false,
+      question4: false,
     };
   }
 
@@ -162,6 +174,7 @@ export default class Terminal extends Component {
         expDate: null,
         csv: null,
         config: inputConfig["default"],
+        path: null,
       });
     }
   }
@@ -178,7 +191,7 @@ export default class Terminal extends Component {
     this.commands = {
       clear: this.clearHistory,
       ls: this.listFiles,
-      cat: this.catFile,
+      open: this.catFile,
       buy: this.buyFile,
       cd: this.enterFolder,
     };
@@ -192,7 +205,25 @@ export default class Terminal extends Component {
   }
 
   catFile(fileName) {
-    if (fileName in fileSystem && fileName !== "mag")
+    if (this.state.path && fileName in fileSystem[this.state.path]) {
+      this.addHistory(fileSystem[this.state.path][fileName]);
+      if (fileName.includes("1")) {
+        this.resetQuestions();
+        this.setState({ question1: true });
+      } else if (fileName.includes("2")) {
+        this.resetQuestions();
+        this.setState({ question2: true });
+      } else if (fileName.includes("3")) {
+        this.resetQuestions();
+        this.setState({ question3: true });
+      } else if (fileName.includes("4")) {
+        this.resetQuestions();
+        this.setState({ question4: true });
+      } else if (fileName.includes("final")) {
+        this.resetQuestions();
+        this.addHistory(fileSystem[fileName]);  
+      }
+    } else if (fileName in fileSystem && fileName !== "mag")
       this.addHistory(fileSystem[fileName]);
     else this.addHistory(`cat: ${fileName}: No such file or directory`);
   }
@@ -210,7 +241,14 @@ export default class Terminal extends Component {
       this.addHistory(`buy: ${fileName}: No such product or drop for sale`);
   }
 
-  enterFolder(fileName) {}
+  enterFolder(fileName) {
+    if (fileName == "" || fileName == undefined) {
+      this.setState({ path: null });
+    } else if (fileName in fileSystem) {
+      this.addHistory(`${fileName}/`);
+      this.setState({ path: "locked" });
+    } else this.addHistory(`cd: ${fileName}: No such file or directory`);
+  }
 
   purchaseRequest() {
     if (this.props.soldout) {
@@ -286,6 +324,7 @@ Your copy of Party Round Mag will be shipped shortly.
       expDate: null,
       csv: null,
       config: inputConfig["default"],
+      path: null,
     });
   }
 
@@ -337,18 +376,38 @@ Your copy of Party Round Mag will be shipped shortly.
   }
 
   listFiles(dir) {
+    if (this.state.path == "locked") {
+      const output = Object.keys(fileSystem["locked"]).reduce(
+        (acc, curr, index) => {
+          const deliminator = index % 3 === 0 && index !== 0 ? "\n" : "\t";
+          return `${acc}${curr}${deliminator}`;
+        },
+        ""
+      );
+
+      return this.addHistory(output);
+    }
     const output = Object.keys(fileSystem).reduce((acc, curr, index) => {
       const deliminator = index % 3 === 0 && index !== 0 ? "\n" : "\t";
       return `${acc}${curr}${deliminator}`;
     }, "");
 
-    this.addHistory(output);
+    return this.addHistory(output);
   }
 
   clearInput() {
     if (this.elements.defaultInput.current)
       this.elements.defaultInput.current.value = "";
     if (this.elements.ccInput.current) this.elements.ccInput.current.value = "";
+  }
+
+  resetQuestions() {
+    this.setState({
+      question1: false,
+      question2: false,
+      question3: false,
+      question4: false,
+    });
   }
 
   detectFocus() {
@@ -421,6 +480,52 @@ Your copy of Party Round Mag will be shipped shortly.
         this.purchaseRequest();
       } else this.addHistory(`sh: command not found: ${inputCommand}`);
       return;
+    } else if (this.state.path == "locked") {
+      if (this.state.question1) {
+        if (inputText == "bear") {
+          this.addHistory(`Correct.`);
+          this.addHistory(
+            `The markets have been rough, so we built a chrome extension to turn your red into green. Check out #beargoggles.xyz#.`
+          );
+        } else {
+          this.addHistory(`Incorrect answer, try again.`);
+        }
+        this.resetQuestions();
+        return;
+      } else if (this.state.question2) {
+        if (inputText == "ads") {
+          this.addHistory(`Correct.`);
+          this.addHistory(
+            `Get paid to do what you do best: Scroll ads. Check out #infinite-pr-ads.webflow.io#.`
+          );
+        } else {
+          this.addHistory(`Incorrect answer, try again.`);
+        }
+        this.resetQuestions();
+        return;
+      } else if (this.state.question3) {
+        if (inputText == "golden") {
+          this.addHistory(`Correct.`);
+          this.addHistory(
+            `If only we were all that lucky... Well maybe you can be! Introducing the new Gold Bar NFT, it's real gold without the real part. Get yours at #goldbarnft.vercel.app#.`
+          );
+        } else {
+          this.addHistory(`Incorrect answer, try again.`);
+        }
+        this.resetQuestions();
+        return;
+      } else if (this.state.question4) {
+        if (inputText == "microsoft") {
+          this.addHistory(`Correct.`);
+          this.addHistory(
+            `If you're like us then all of your LinkedIn connection are doing better than you. One up them with our new product, LinkedInfluencer™, at #linkedinfluencer.co#.`
+          );
+        } else {
+          this.addHistory(`Incorrect answer, try again.`);
+        }
+        this.resetQuestions();
+        return;
+      }
     }
 
     const command = this.commands[inputCommand];
